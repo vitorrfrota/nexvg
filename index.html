@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXVG — Presença Digital que Gera Resultados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+   
+
+  
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+
+  <header id="header">
+    <a class="logo" href="#inicio">
+      <!-- Substitua o src abaixo pelo caminho da sua logo. Ex: src="logo.png" -->
+      <img class="logo-img" src="images/logo.jpg" alt="NEXVG"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <div class="logo-img-placeholder" style="display:none;">Logo</div>
+      
+    </a>
+    <nav>
+      <a href="#problema">O Problema</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Processo</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contato" class="nav-cta">Falar com Especialista</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ══ MOBILE NAV ══ -->
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#problema" class="mob-link">O Problema</a>
+    <a href="#servicos" class="mob-link">Serviços</a>
+    <a href="#processo" class="mob-link">Processo</a>
+    <a href="#faq" class="mob-link">FAQ</a>
+    <a href="#contato" class="mob-link m-cta">Falar com Especialista</a>
+  </div>
+
+  <!-- ══ HERO ══ -->
+
+  <section class="hero" id="inicio">
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">Consultoria em Presença Digital</div>
+      <h1 class="reveal reveal-delay-1">
+        Sua empresa precisa ser<br /><em>encontrada</em> antes de<br />ser escolhida.
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Ajudamos pequenas e médias empresas a construir uma presença digital sólida, profissional e que converte visitantes em clientes reais.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#contato" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Diagnóstico Gratuito
+        </a>
+        <a href="#servicos" class="btn-ghost">Ver Serviços →</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span></span>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ══ PROOF STRIP ══ -->
+
+  <div class="proof-strip">
+    <div class="proof-track" id="proofTrack">
+      <span class="proof-item">Lojas locais</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Escritórios jurídicos</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Clínicas e consultórios</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Prestadores de serviços</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Comércio varejista</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Segurança eletrônica</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Climatização e TI</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Mecânicas e oficinas</span>
+      <span class="proof-dot"></span>
+      <!-- duplicado para loop contínuo -->
+      <span class="proof-item">Lojas locais</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Escritórios jurídicos</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Clínicas e consultórios</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Prestadores de serviços</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Comércio varejista</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Segurança eletrônica</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Climatização e TI</span>
+      <span class="proof-dot"></span>
+      <span class="proof-item">Mecânicas e oficinas</span>
+      <span class="proof-dot"></span>
+    </div>
+  </div>
+
+  <!-- ══ O PROBLEMA ══ -->
+
+  <section id="problema" class="section-pad">
+    <div class="container">
+      <div class="argument-grid">
+        <div>
+          <span class="section-label reveal">O Cenário Atual</span>
+          <h2 class="section-title reveal reveal-delay-1">
+            Sua empresa existe.<br />
+            Mas o Google<br /><em>sabe disso?</em>
+          </h2>
+          <p class="section-desc reveal reveal-delay-2">
+            Mais de 90% dos consumidores pesquisam online antes de comprar — mesmo quando vão comprar perto de casa. Uma empresa invisível no digital é uma empresa que perde vendas todos os dias sem perceber.
+          </p>
+          <div class="argument-stats">
+            <div class="stat-card reveal reveal-delay-1">
+              <div class="stat-num">93%</div>
+              <div class="stat-label">das experiências de compra começam num mecanismo de busca</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-2">
+              <div class="stat-num">75%</div>
+              <div class="stat-label">dos usuários nunca passam da primeira página do Google</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-3">
+              <div class="stat-num">3×</div>
+              <div class="stat-label">mais leads gerados por empresas com presença digital ativa</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-4">
+              <div class="stat-num">8s</div>
+              <div class="stat-label">é o tempo médio que um visitante leva pra julgar seu site</div>
+            </div>
+          </div>
+        </div>
+
+
+    <div class="argument-visual reveal reveal-delay-2">
+      <div class="argument-visual-inner">
+        <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Problemas mais comuns que vemos</p>
+        <ul class="problem-list">
+          <li class="problem-item">
+            <div class="problem-icon">🔍</div>
+            <div class="problem-text">
+              <strong>Invisibilidade nos buscadores</strong>
+              <span>Nenhum potencial cliente acha sua empresa quando pesquisa o serviço que você oferece.</span>
+            </div>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">📱</div>
+            <div class="problem-text">
+              <strong>Site que não converte (ou não existe)</strong>
+              <span>Sem uma presença profissional, a confiança do cliente vai direto para o concorrente.</span>
+            </div>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">📊</div>
+            <div class="problem-text">
+              <strong>Nenhum controle sobre a reputação digital</strong>
+              <span>Avaliações negativas sem resposta e perfis desatualizados prejudicam silenciosamente.</span>
+            </div>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">🎯</div>
+            <div class="problem-text">
+              <strong>Divulgação sem estratégia</strong>
+              <span>Investir em tráfego sem ter uma base digital sólida é dinheiro jogado fora.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══ SERVIÇOS ══ -->
+
+  <section id="servicos" class="section-pad services-bg">
+    <div class="container">
+      <div class="services-intro">
+        <div>
+          <span class="section-label reveal">O Que Fazemos</span>
+          <h2 class="section-title reveal reveal-delay-1">
+            Soluções pensadas<br />para <em>resultados reais</em>
+          </h2>
+        </div>
+        <div>
+          <p class="section-desc reveal reveal-delay-2">
+            Não vendemos pacotes prontos. Diagnosticamos sua empresa, entendemos seu mercado e entregamos o que vai de fato mover seus números.
+          </p>
+        </div>
+      </div>
+
+```
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">🌐</div>
+      <h3 class="service-title">Site Profissional de Alta Conversão</h3>
+      <p class="service-desc">Desenvolvimento de sites modernos, rápidos e responsivos, projetados para transformar visitantes em contatos qualificados — não apenas para "ter um site".</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-icon">📍</div>
+      <h3 class="service-title">Presença Local Otimizada</h3>
+      <p class="service-desc">Configuração e otimização do Google Business Profile, mapeamento local e estratégias para aparecer quando o cliente está pronto para comprar na sua região.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-icon">⚡</div>
+      <h3 class="service-title">SEO e Visibilidade Orgânica</h3>
+      <p class="service-desc">Estrutura técnica e de conteúdo que faz sua empresa ser encontrada nos momentos certos — sem depender só de anúncios pagos.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <div class="service-icon">📣</div>
+      <h3 class="service-title">Estratégia de Conteúdo</h3>
+      <p class="service-desc">Criação de conteúdo que posiciona sua empresa como referência no segmento, gera confiança e aproxima o cliente da decisão de compra.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">05</div>
+      <div class="service-icon">💬</div>
+      <h3 class="service-title">Gestão de Reputação Online</h3>
+      <p class="service-desc">Monitoramento e resposta a avaliações, construção de autoridade digital e gestão da imagem da sua marca nos principais canais.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">06</div>
+      <div class="service-icon">📈</div>
+      <h3 class="service-title">Consultoria e Diagnóstico Digital</h3>
+      <p class="service-desc">Análise completa da sua situação digital atual com um plano de ação claro, priorizado e executável — independente do tamanho da sua empresa.</p>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ══ COMO FUNCIONA ══ -->
+
+  <section id="processo" class="section-pad">
+    <div class="container" style="text-align:center;">
+      <span class="section-label reveal" style="justify-content:center;">Como Funciona</span>
+      <h2 class="section-title reveal reveal-delay-1" style="max-width:540px;margin:0 auto;">
+        Um processo claro,<br />sem <em>surpresas</em>
+      </h2>
+      <p class="section-desc reveal reveal-delay-2" style="margin:16px auto 0;text-align:center;">
+        Da primeira conversa até o resultado mensurável, você sabe exatamente o que acontece em cada etapa.
+      </p>
+
+```
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Diagnóstico Gratuito</div>
+        <div class="step-desc">Uma conversa de 30 minutos para entender sua empresa, seus objetivos e mapear os pontos críticos da sua presença digital atual. Sem custo, sem compromisso.</div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Proposta Personalizada</div>
+        <div class="step-desc">Com base no diagnóstico, apresentamos um plano de ação específico para o seu negócio — com etapas, prazos e resultados esperados claros.</div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Execução e Acompanhamento</div>
+        <div class="step-desc">Colocamos o plano em prática com total transparência. Você recebe atualizações regulares e tem acesso direto a quem está trabalhando na sua empresa.</div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Resultados e Evolução Contínua</div>
+        <div class="step-desc">Monitoramos métricas reais: tráfego, contatos gerados, posicionamento. Ajustamos a estratégia conforme o seu negócio cresce.</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══ DEPOIMENTOS ══ -->
+
+  <section class="section-pad testimonials-bg" id="depoimentos">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-label reveal" style="justify-content:center;">Resultados Reais</span>
+        <h2 class="section-title reveal reveal-delay-1" style="max-width:480px;margin:0 auto;">
+          Empresas que<br /><em>evoluíram</em> com a NEXVG
+        </h2>
+      </div>
+
+
+  <!-- CAROUSEL WRAPPER -->
+  <div class="tc-root reveal reveal-delay-2">
+
+    <!-- TRACK -->
+    <div class="tc-viewport">
+      <div class="tc-track" id="tcTrack">
+
+        <div class="tc-slide">
+          <div class="tc-card">
+            <div class="tc-top">
+              <div class="tc-stars">★★★★★</div>
+              <div class="tc-glyph">"</div>
+            </div>
+            <p class="tc-text">Antes do site novo, a gente dependia só do boca a boca. Em três meses, os contatos pelo WhatsApp triplicaram. Os clientes chegam sabendo o que queremos cobrar.</p>
+            <div class="tc-author">
+              <div class="tc-avatar">R</div>
+              <div>
+                <div class="tc-name">Ricardo Mendes</div>
+                <div class="tc-role">Refrigeração e Climatização</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tc-slide">
+          <div class="tc-card">
+            <div class="tc-top">
+              <div class="tc-stars">★★★★★</div>
+              <div class="tc-glyph">"</div>
+            </div>
+            <p class="tc-text">Eu achava que site era coisa de empresa grande. A NEXVG me mostrou que era exatamente o contrário — meu concorrente já tinha e eu estava perdendo clientes sem saber.</p>
+            <div class="tc-author">
+              <div class="tc-avatar">C</div>
+              <div>
+                <div class="tc-name">Carla Fonseca</div>
+                <div class="tc-role">Estúdio de Estética</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tc-slide">
+          <div class="tc-card">
+            <div class="tc-top">
+              <div class="tc-stars">★★★★★</div>
+              <div class="tc-glyph">"</div>
+            </div>
+            <p class="tc-text">O processo foi simples e transparente. Recebi um plano claro, sem enrolação. Hoje a minha loja aparece nas buscas e os clientes chegam já com intenção de comprar.</p>
+            <div class="tc-author">
+              <div class="tc-avatar">M</div>
+              <div>
+                <div class="tc-name">Marcos Oliveira</div>
+                <div class="tc-role">Manutenção de Smartphones</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tc-slide">
+          <div class="tc-card">
+            <div class="tc-top">
+              <div class="tc-stars">★★★★★</div>
+              <div class="tc-glyph">"</div>
+            </div>
+            <p class="tc-text">Tinha medo de investir em algo que não entendia. A equipe me explicou tudo passo a passo. Resultado: minha clínica está aparecendo no Google e os agendamentos aumentaram.</p>
+            <div class="tc-author">
+              <div class="tc-avatar">A</div>
+              <div>
+                <div class="tc-name">Ana Beatriz Lima</div>
+                <div class="tc-role">Clínica Estética</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tc-slide">
+          <div class="tc-card">
+            <div class="tc-top">
+              <div class="tc-stars">★★★★★</div>
+              <div class="tc-glyph">"</div>
+            </div>
+            <p class="tc-text">Minha oficina estava invisível no Google. Em dois meses com a NEXVG, já recebo ligações direto pelo perfil do Google. Valeu cada centavo do investimento.</p>
+            <div class="tc-author">
+              <div class="tc-avatar">J</div>
+              <div>
+                <div class="tc-name">Jonas Pereira</div>
+                <div class="tc-role">Oficina Mecânica</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tc-track -->
+    </div><!-- /tc-viewport -->
+
+    <!-- CONTROLS -->
+    <div class="tc-controls">
+      <button class="tc-btn" id="tcPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="tc-dots" id="tcDots"></div>
+      <button class="tc-btn" id="tcNext" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="tc-progress-wrap">
+      <div class="tc-progress-bar" id="tcProgress"></div>
+    </div>
+
+  </div><!-- /tc-root -->
+</div>
+
+
+  </section>
+
+  <!-- ══ CTA PRINCIPAL ══ -->
+
+  <section id="contato" class="cta-section">
+    <div class="container">
+      <h2 class="cta-title reveal">
+        Pronto para parar de<br /><em>perder clientes</em><br />para o concorrente?
+      </h2>
+      <p class="cta-sub reveal reveal-delay-1">
+        Agende um diagnóstico gratuito de 30 minutos e descubra exatamente o que está impedindo sua empresa de crescer no digital.
+      </p>
+      <div class="reveal reveal-delay-2">
+        <a href="https://wa.me/5521000000000?text=Olá!%20Gostaria%20de%20agendar%20um%20diagnóstico%20gratuito%20com%20a%20NEXVG." target="_blank" class="btn-primary" style="font-size:.9rem;padding:18px 44px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <p class="cta-guarantee">Diagnóstico 100% gratuito e sem compromisso</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+
+  <section id="faq" class="section-pad" style="padding-top:0;">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:0;">
+        <span class="section-label reveal" style="justify-content:center;">Dúvidas Frequentes</span>
+        <h2 class="section-title reveal reveal-delay-1" style="max-width:400px;margin:0 auto;">
+          Perguntas que<br />nos fazem <em>sempre</em>
+        </h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Minha empresa é pequena. Vale mesmo investir em presença digital?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">Sim — especialmente se for pequena. Empresas de grande porte já têm marca consolidada. Para uma empresa pequena, o digital é o nivelador: permite que você apareça para os clientes certos, no momento certo, sem depender de um orçamento enorme de marketing.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Quanto tempo leva para ver resultados?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">Depende da estratégia. Um site novo com WhatsApp integrado pode gerar contatos já na primeira semana. SEO e posicionamento orgânico levam de 2 a 4 meses para mostrar crescimento consistente. Alinhamos as expectativas logo no início para que você saiba o que esperar em cada fase.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Preciso entender de tecnologia para trabalhar com vocês?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">Não. Nossa função é exatamente traduzir o mundo digital para a realidade do seu negócio. Você foca no que sabe fazer — a gente cuida do resto e te explica tudo de forma simples e direta.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>O diagnóstico é realmente gratuito? Tem algum compromisso?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">100% gratuito, sem compromisso. Nosso objetivo é mostrar valor antes de pedir qualquer coisa em troca. Se depois do diagnóstico você decidir não seguir em frente, tudo bem — você já vai sair com informações úteis sobre sua situação digital.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Vocês atendem empresas de que segmentos?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">Trabalhamos com pequenas e médias empresas de praticamente todos os segmentos: serviços técnicos, clínicas, lojas físicas, escritórios, oficinas, comércio local e muito mais. Se você tem clientes para conquistar, nós temos como ajudar.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">NEX<span>VG</span></div>
+          <p class="footer-desc">Ajudamos pequenas e médias empresas a construir presença digital sólida, profissional e que converte visitantes em clientes reais.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="#problema">O Problema</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#processo">Como Funciona</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Contato</div>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/5521000000000" target="_blank">WhatsApp</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#e4878b8a9085908ba4859c8d859282ca878b89ca8696"><span class="__cf_email__" data-cfemail="d4b7bbbaa0b5a0bb94b5acbdb5a2b2fab7bbb9fab6a6">[email&#160;protected]</span></a></li>
+            <li><a href="#contato">Diagnóstico Gratuito</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 <span>NEXVG</span>. Todos os direitos reservados.</p>
+        <p class="footer-copy">Nova Iguaçu — RJ, Brasil</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ WHATSAPP FLOAT ══ -->
+
+  <a class="whatsapp-float" href="https://wa.me/5521000000000?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20NEXVG." target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.76.71 5.35 1.95 7.6L.5 31.5l8.18-1.93A15.44 15.44 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.3a13.24 13.24 0 01-6.74-1.84l-.48-.29-5.01 1.18 1.2-4.87-.31-.5A13.25 13.25 0 1116 28.8zm7.27-9.93c-.4-.2-2.35-1.16-2.71-1.29-.36-.14-.63-.2-.89.2-.26.39-1.02 1.29-1.25 1.56-.23.27-.46.3-.86.1-.4-.2-1.68-.62-3.2-1.98-1.18-1.05-1.98-2.35-2.21-2.74-.23-.4-.02-.61.17-.81.18-.18.4-.46.6-.7.2-.22.26-.39.4-.65.13-.26.07-.49-.03-.69-.1-.2-.9-2.16-1.23-2.96-.32-.78-.65-.67-.89-.68l-.75-.01c-.26 0-.69.1-1.05.49-.36.4-1.38 1.35-1.38 3.3s1.41 3.83 1.61 4.09c.2.26 2.78 4.24 6.73 5.95.94.41 1.67.65 2.24.83.94.3 1.8.26 2.47.16.75-.11 2.35-.96 2.68-1.89.33-.92.33-1.71.23-1.88-.1-.16-.36-.26-.76-.46z"/>
+    </svg>
+  </a>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

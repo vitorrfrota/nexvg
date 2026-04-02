@@ -288,6 +288,76 @@ nav a:hover { color: var(--gold); }
 .hero-scroll span { width: 1px; height: 40px; background: linear-gradient(180deg, var(--gold-dk), transparent); }
 @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
 
+/* ══ SEGMENTOS ══ */
+.seg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.seg-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 28px 24px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s, border-color .3s;
+  cursor: pointer;
+}
+.seg-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-dk), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s var(--ease);
+}
+.seg-card:hover { background: #0e1e2e; border-color: var(--gold-dk); }
+.seg-card:hover::after { transform: scaleX(1); }
+.seg-card:hover .seg-arrow { transform: translateX(4px); color: var(--gold); }
+
+.seg-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  background: rgba(61,221,232,.08);
+  border: 1px solid var(--gold-dk);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.seg-body { flex: 1; }
+.seg-title {
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.seg-desc {
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.seg-arrow {
+  font-size: 1rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform .3s, color .3s;
+}
+
+@media (max-width: 900px) {
+  .seg-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .seg-grid { grid-template-columns: 1fr; }
+}
+
 /* ── SECTION SHARED ── */
 section { position: relative; z-index: 1; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 5vw; }

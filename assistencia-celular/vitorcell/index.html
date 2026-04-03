@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitorCell -- Assistência Técnica Especializada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--green: #a3e635;
+--green-dark: #65a30d;
+--green-glow: rgba(163,230,53,0.35);
+--black: #080a06;
+--dark: #0e1209;
+--card: #121a0d;
+--border: rgba(163,230,53,0.18);
+--text: #e8f5d0;
+--muted: #6b7a5a;
+--white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: "DM Sans", sans-serif;
+background: var(--black);
+color: var(--text);
+overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+content: "";
+position: fixed; inset: 0;
+}
+/* ── NAV ── */
+nav {
+position: fixed; top: 0; width: 100%; z-index: 100;
+display: flex; align-items: center; justify-content: space-between;
+padding: 1rem 5%;
+background: rgba(8,10,6,0.85);
+backdrop-filter: blur(14px);
+border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+font-family: "Exo 2", sans-serif;
+font-weight: 900; font-size: 1.4rem;
+color: var(--green);
+letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--white); }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+color: var(--muted); font-size: .875rem; font-weight: 500;
+text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--green); }
+
+.nav-cta {
+background: var(--green); color: var(--black);
+padding: .5rem 1.25rem; border-radius: 99px;
+font-weight: 700; font-size: .85rem;
+text-decoration: none; transition: box-shadow .2s, transform .2s;
+white-space: nowrap;
+}
+.nav-cta:hover { box-shadow: 0 0 20px var(--green-glow); transform: translateY(-1px); }
+
+.hamburger {
+display: none; flex-direction: column; gap: 5px;
+cursor: pointer; padding: 4px;
+}
+.hamburger span {
+display: block; width: 24px; height: 2px;
+background: var(--green); border-radius: 2px;
+transition: transform .3s, opacity .3s;
+}
+
+/* mobile menu */
+.mobile-menu {
+display: none; position: fixed; top: 64px; left: 0; width: 100%; z-index: 99;
+background: rgba(8,10,6,0.97); padding: 1.5rem 5%;
+border-bottom: 1px solid var(--border);
+flex-direction: column; gap: 1.2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+color: var(--text); font-size: 1rem; font-weight: 500;
+text-decoration: none; padding: .5rem 0;
+border-bottom: 1px solid var(--border);
+}
+
+/* ── HERO ── */
+.hero {
+min-height: 100svh;
+display: flex; align-items: center;
+padding: 7rem 5% 4rem;
+position: relative; overflow: hidden;
+}
+
+.hero-glow {
+position: absolute; top: -120px; right: -120px;
+width: 600px; height: 600px;
+background: radial-gradient(circle, rgba(163,230,53,0.15) 0%, transparent 70%);
+pointer-events: none;
+}
+.hero-glow2 {
+position: absolute; bottom: -100px; left: -100px;
+width: 400px; height: 400px;
+background: radial-gradient(circle, rgba(163,230,53,0.07) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 640px; }
+
+.hero-badge {
+display: inline-flex; align-items: center; gap: .5rem;
+background: rgba(163,230,53,0.1); border: 1px solid var(--border);
+border-radius: 99px; padding: .35rem .9rem;
+font-size: .8rem; color: var(--green); font-weight: 600;
+margin-bottom: 1.5rem;
+animation: fadeUp .6s ease both;
+}
+.hero-badge::before {
+content: ""; width: 8px; height: 8px;
+background: var(--green); border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%,100% { opacity: 1; transform: scale(1); }
+50% { opacity: .5; transform: scale(.8); }
+}
+
+h1 {
+font-family: "Exo 2", sans-serif;
+font-size: clamp(2.4rem, 6vw, 4.2rem);
+font-weight: 900; line-height: 1.05;
+color: var(--white);
+animation: fadeUp .7s .1s ease both;
+}
+h1 em { color: var(--green); font-style: normal; }
+
+.hero-sub {
+margin-top: 1.2rem; font-size: 1.05rem;
+color: var(--muted); line-height: 1.7;
+max-width: 480px;
+animation: fadeUp .7s .2s ease both;
+}
+
+.hero-pills {
+display: flex; flex-wrap: wrap; gap: .6rem;
+margin-top: 1.8rem;
+animation: fadeUp .7s .3s ease both;
+}
+.pill {
+background: var(--card); border: 1px solid var(--border);
+border-radius: 99px; padding: .4rem .9rem;
+font-size: .8rem; color: var(--text); font-weight: 500;
+}
+
+.hero-btns {
+display: flex; flex-wrap: wrap; gap: 1rem;
+margin-top: 2.2rem;
+animation: fadeUp .7s .4s ease both;
+}
+.btn-primary {
+display: inline-flex; align-items: center; gap: .5rem;
+background: var(--green); color: var(--black);
+padding: .85rem 2rem; border-radius: 99px;
+font-weight: 700; font-size: .95rem;
+text-decoration: none; transition: box-shadow .2s, transform .2s;
+}
+.btn-primary:hover { box-shadow: 0 0 30px var(--green-glow); transform: translateY(-2px); }
+.btn-secondary {
+display: inline-flex; align-items: center; gap: .5rem;
+border: 1px solid var(--border); color: var(--text);
+padding: .85rem 2rem; border-radius: 99px;
+font-weight: 600; font-size: .95rem;
+text-decoration: none; transition: border-color .2s, color .2s;
+}
+.btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(24px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+display: grid; grid-template-columns: repeat(3, 1fr);
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+background: var(--card);
+position: relative; z-index: 1;
+}
+.stat-item {
+padding: 1.5rem 2rem;
+text-align: center;
+border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+font-family: "Exo 2", sans-serif;
+font-size: 1.9rem; font-weight: 900;
+color: var(--green);
+}
+.stat-label { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+
+/* ── SECTIONS SHARED ── */
+section { padding: 5rem 5%; position: relative; }
+.section-tag {
+display: inline-block;
+font-size: .75rem; font-weight: 700;
+color: var(--green); letter-spacing: 2px;
+text-transform: uppercase; margin-bottom: .8rem;
+}
+h2 {
+font-family: "Exo 2", sans-serif;
+font-size: clamp(1.6rem, 4vw, 2.6rem);
+font-weight: 900; color: var(--white);
+line-height: 1.1;
+}
+h2 em { color: var(--green); font-style: normal; }
+.section-sub {
+color: var(--muted); margin-top: .8rem;
+max-width: 520px; line-height: 1.7;
+}
+
+/* ── SERVICES ── */
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 1.2rem; margin-top: 3rem;
+}
+.service-card {
+background: var(--card);
+border: 1px solid var(--border);
+border-radius: 16px; padding: 1.8rem;
+transition: border-color .2s, transform .2s, box-shadow .2s;
+position: relative; overflow: hidden;
+}
+.service-card::before {
+content: "";
+position: absolute; top: 0; left: 0; right: 0; height: 2px;
+background: linear-gradient(90deg, transparent, var(--green), transparent);
+opacity: 0; transition: opacity .3s;
+}
+.service-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+.service-card:hover::before { opacity: 1; }
+
+.svc-icon {
+width: 48px; height: 48px;
+background: rgba(163,230,53,0.1);
+border-radius: 12px; display: flex; align-items: center; justify-content: center;
+font-size: 1.5rem; margin-bottom: 1.2rem;
+border: 1px solid var(--border);
+}
+.svc-title {
+font-family: "Exo 2", sans-serif;
+font-size: 1.05rem; font-weight: 700;
+color: var(--white); margin-bottom: .5rem;
+}
+.svc-desc { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+/* ── CAROUSEL ── */
+.carousel-section { background: var(--dark); }
+.carousel-wrap { margin-top: 2.5rem; position: relative; }
+
+.carousel-track-outer {
+overflow: hidden; border-radius: 16px;
+border: 1px solid var(--border);
+background: #0a0f07;
+}
+.carousel-track {
+display: flex; transition: transform .45s cubic-bezier(.4,0,.2,1);
+}
+.carousel-slide {
+min-width: 100%; aspect-ratio: 16/9;
+display: flex; align-items: center; justify-content: center;
+position: relative; overflow: hidden;
+}
+
+/* Placeholder slides with gradient patterns */
+.carousel-slide .slide-bg {
+position: absolute; inset: 0;
+display: flex; align-items: center; justify-content: center;
+flex-direction: column; gap: 1rem;
+}
+.slide-1 .slide-bg { background: linear-gradient(135deg, #0d1a08 0%, #1a2e0e 50%, #0d1a08 100%); }
+.slide-2 .slide-bg { background: linear-gradient(135deg, #0a1206 0%, #162209 50%, #0a1206 100%); }
+.slide-3 .slide-bg { background: linear-gradient(135deg, #111e08 0%, #1d300d 50%, #111e08 100%); }
+.slide-4 .slide-bg { background: linear-gradient(135deg, #0c1507 0%, #182508 50%, #0c1507 100%); }
+
+.slide-placeholder-icon { font-size: 4rem; opacity: .3; }
+.slide-placeholder-text {
+font-family: "Exo 2", sans-serif;
+font-size: 1.1rem; font-weight: 700;
+color: var(--green); opacity: .4;
+text-align: center; letter-spacing: 1px;
+}
+.slide-label {
+position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem;
+background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
+border: 1px solid var(--border); border-radius: 10px;
+padding: .7rem 1rem;
+display: flex; align-items: center; justify-content: space-between;
+}
+.slide-label-title {
+font-family: "Exo 2", sans-serif;
+font-size: .9rem; font-weight: 700; color: var(--white);
+}
+.slide-label-sub { font-size: .75rem; color: var(--muted); margin-top: .15rem; }
+
+.carousel-controls {
+display: flex; align-items: center; justify-content: center;
+gap: 1rem; margin-top: 1.2rem;
+}
+.carousel-btn {
+width: 44px; height: 44px; border-radius: 50%;
+background: var(--card); border: 1px solid var(--border);
+color: var(--text); font-size: 1.1rem;
+cursor: pointer; transition: background .2s, border-color .2s;
+display: flex; align-items: center; justify-content: center;
+}
+.carousel-btn:hover { background: var(--green); color: var(--black); border-color: var(--green); }
+
+.carousel-dots { display: flex; gap: .5rem; }
+.dot {
+width: 8px; height: 8px; border-radius: 99px;
+background: var(--border); cursor: pointer;
+transition: background .2s, width .3s;
+}
+.dot.active { background: var(--green); width: 24px; }
+
+/* ── HIGHLIGHTS / DIFERENCIAIS ── */
+.highlights { background: var(--black); }
+.highlights-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 1rem; margin-top: 3rem;
+}
+.hl-card {
+background: var(--card); border: 1px solid var(--border);
+border-radius: 14px; padding: 1.5rem;
+text-align: center;
+transition: border-color .2s, transform .2s;
+}
+.hl-card:hover { border-color: var(--green); transform: translateY(-3px); }
+.hl-icon { font-size: 2.2rem; margin-bottom: .8rem; }
+.hl-title {
+font-family: "Exo 2", sans-serif;
+font-size: .95rem; font-weight: 700; color: var(--white);
+}
+.hl-sub { font-size: .8rem; color: var(--muted); margin-top: .3rem; }
+
+/* ── PELICULAS SECTION ── */
+.pelicula-section { background: var(--dark); }
+.pelicula-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 2rem; margin-top: 3rem; align-items: center;
+}
+.pelicula-visual {
+background: var(--card); border: 1px solid var(--border);
+border-radius: 20px; aspect-ratio: 4/3;
+display: flex; align-items: center; justify-content: center;
+flex-direction: column; gap: 1rem;
+position: relative; overflow: hidden;
+}
+.pelicula-visual::after {
+content: "";
+position: absolute; inset: 0;
+background: radial-gradient(circle at center, rgba(163,230,53,0.06), transparent 70%);
+}
+.pv-icon { font-size: 4rem; }
+.pv-text {
+font-family: "Exo 2", sans-serif;
+font-size: .9rem; font-weight: 700; color: var(--green);
+opacity: .5; text-align: center;
+}
+
+.pelicula-list { list-style: none; display: flex; flex-direction: column; gap: .8rem; margin-top: 1.5rem; }
+.pelicula-list li {
+display: flex; align-items: center; gap: .8rem;
+font-size: .9rem; color: var(--text);
+}
+.pelicula-list li::before {
+content: ""; width: 8px; height: 8px; border-radius: 50%;
+background: var(--green); flex-shrink: 0;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: var(--black); }
+.testi-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 1.2rem; margin-top: 3rem;
+}
+.testi-card {
+background: var(--card); border: 1px solid var(--border);
+border-radius: 16px; padding: 1.6rem;
+transition: border-color .2s;
+}
+.testi-card:hover { border-color: var(--green); }
+.testi-stars { color: var(--green); font-size: .9rem; letter-spacing: 2px; margin-bottom: .8rem; }
+.testi-text { font-size: .9rem; color: var(--text); line-height: 1.7; font-style: italic; }
+.testi-author {
+display: flex; align-items: center; gap: .8rem;
+margin-top: 1.2rem;
+}
+.testi-avatar {
+width: 36px; height: 36px; border-radius: 50%;
+background: linear-gradient(135deg, var(--green), var(--green-dark));
+display: flex; align-items: center; justify-content: center;
+font-weight: 700; font-size: .85rem; color: var(--black);
+flex-shrink: 0;
+}
+.testi-name { font-size: .85rem; font-weight: 600; color: var(--white); }
+.testi-since { font-size: .75rem; color: var(--muted); }
+
+/* ── CTA BANNER ── */
+.cta-banner {
+background: var(--dark);
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+padding: 5rem 5%;
+text-align: center; position: relative; overflow: hidden;
+}
+.cta-banner::before {
+content: "";
+position: absolute; top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+width: 600px; height: 300px;
+background: radial-gradient(ellipse, rgba(163,230,53,0.12), transparent 70%);
+pointer-events: none;
+}
+.cta-banner h2 { position: relative; }
+.cta-banner p {
+color: var(--muted); margin-top: 1rem;
+font-size: 1.05rem; position: relative;
+}
+.cta-banner .hero-btns { justify-content: center; margin-top: 2rem; position: relative; }
+
+/* ── LOCATION ── */
+.location-section { background: var(--black); }
+.location-grid {
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 2rem; margin-top: 3rem; align-items: start;
+}
+.location-info { display: flex; flex-direction: column; gap: 1.2rem; }
+.loc-item {
+display: flex; align-items: flex-start; gap: 1rem;
+background: var(--card); border: 1px solid var(--border);
+border-radius: 12px; padding: 1.2rem;
+}
+.loc-icon {
+width: 40px; height: 40px; background: rgba(163,230,53,0.1);
+border-radius: 10px; display: flex; align-items: center; justify-content: center;
+font-size: 1.1rem; flex-shrink: 0;
+}
+.loc-title { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.loc-value { font-size: .95rem; color: var(--white); margin-top: .2rem; line-height: 1.5; }
+
+.map-placeholder {
+background: var(--card); border: 1px solid var(--border);
+border-radius: 16px; aspect-ratio: 4/3;
+display: flex; align-items: center; justify-content: center;
+flex-direction: column; gap: 1rem;
+position: relative; overflow: hidden;
+}
+.map-placeholder::before {
+content: "";
+position: absolute; inset: 0;
+background:
+repeating-linear-gradient(0deg, rgba(163,230,53,.04) 0px, rgba(163,230,53,.04) 1px, transparent 1px, transparent 40px),
+repeating-linear-gradient(90deg, rgba(163,230,53,.04) 0px, rgba(163,230,53,.04) 1px, transparent 1px, transparent 40px);
+}
+.map-pin { font-size: 3rem; position: relative; z-index: 1; }
+.map-text {
+font-family: "Exo 2", sans-serif;
+font-size: .85rem; font-weight: 700;
+color: var(--green); opacity: .6;
+text-align: center; position: relative; z-index: 1;
+}
+.map-btn {
+position: relative; z-index: 1;
+background: var(--green); color: var(--black);
+padding: .6rem 1.4rem; border-radius: 99px;
+font-weight: 700; font-size: .85rem;
+text-decoration: none; transition: box-shadow .2s;
+margin-top: .5rem;
+}
+.map-btn:hover { box-shadow: 0 0 20px var(--green-glow); }
+
+/* ── FOOTER ── */
+footer {
+background: var(--dark);
+border-top: 1px solid var(--border);
+padding: 3rem 5% 2rem;
+}
+.footer-top {
+display: flex; justify-content: space-between; align-items: flex-start;
+flex-wrap: wrap; gap: 2rem;
+padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+}
+.footer-brand .nav-logo { font-size: 1.6rem; }
+.footer-brand p { color: var(--muted); font-size: .85rem; margin-top: .5rem; max-width: 260px; line-height: 1.6; }
+.footer-socials { display: flex; gap: .8rem; margin-top: 1rem; }
+.social-btn {
+width: 38px; height: 38px; border-radius: 10px;
+background: var(--card); border: 1px solid var(--border);
+display: flex; align-items: center; justify-content: center;
+color: var(--muted); font-size: .9rem; text-decoration: none;
+transition: border-color .2s, color .2s;
+}
+.social-btn:hover { border-color: var(--green); color: var(--green); }
+.footer-links h4 {
+font-family: "Exo 2", sans-serif;
+font-size: .8rem; font-weight: 700; color: var(--text);
+letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem;
+}
+.footer-links ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+.footer-links a {
+color: var(--muted); font-size: .87rem; text-decoration: none;
+transition: color .2s;
+}
+.footer-links a:hover { color: var(--green); }
+.footer-bottom {
+display: flex; justify-content: space-between; align-items: center;
+flex-wrap: wrap; gap: 1rem;
+padding-top: 1.5rem;
+}
+.footer-bottom p { font-size: .78rem; color: var(--muted); }
+.footer-bottom a { color: var(--green); text-decoration: none; }
+
+/* ── WHATSAPP FLOAT ── */
+.wpp-float {
+position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+width: 58px; height: 58px; border-radius: 50%;
+background: #25d366; color: #fff;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.6rem; text-decoration: none;
+box-shadow: 0 4px 20px rgba(37,211,102,.5);
+transition: transform .2s, box-shadow .2s;
+animation: floatIn .5s 1s ease both;
+}
+.wpp-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,.7); }
+@keyframes floatIn { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
+
+/* ── REVEAL ANIMATION ── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+.pelicula-grid, .location-grid { grid-template-columns: 1fr; }
+.pelicula-visual { aspect-ratio: 16/9; }
+}
+
+@media (max-width: 700px) {
+.nav-links, .nav-cta { display: none; }
+.hamburger { display: flex; }
+h1 { font-size: 2.2rem; }
+.stats-bar { grid-template-columns: 1fr; }
+.stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+.stat-item:last-child { border-bottom: none; }
+.hero-btns { flex-direction: column; }
+.btn-primary, .btn-secondary { justify-content: center; }
+.footer-top { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+section { padding: 3.5rem 4%; }
+nav { padding: 1rem 4%; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-logo">Vitor<span>Cell</span></div>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#loja">Loja</a></li>
+    <li><a href="#peliculas">Películas</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5521900000000" class="nav-cta" target="_blank">💬 Chamar no Zap</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicos" onclick="toggleMenu()">Serviços</a>
+  <a href="#loja" onclick="toggleMenu()">Loja</a>
+  <a href="#peliculas" onclick="toggleMenu()">Películas</a>
+  <a href="#depoimentos" onclick="toggleMenu()">Depoimentos</a>
+  <a href="#contato" onclick="toggleMenu()">Contato</a>
+  <a href="https://wa.me/5521900000000" style="color:var(--green);font-weight:700;" target="_blank">💬 Chamar no WhatsApp</a>
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🟢 Aberto agora · Nova Iguaçu</div>
+    <h1>Assistência<br>Técnica <em>Especializada</em></h1>
+    <p class="hero-sub">Conserto rápido, películas hidrogel premium e troca de tela com qualidade garantida. Seu celular em boas mãos.</p>
+    <div class="hero-pills">
+      <span class="pill">📱 Troca de Tela</span>
+      <span class="pill">🛡️ Película Hidrogel</span>
+      <span class="pill">🔋 Bateria</span>
+      <span class="pill">💧 Dano por Água</span>
+      <span class="pill">⚡ Conector de Carga</span>
+    </div>
+    <div class="hero-btns">
+      <a href="https://wa.me/5521900000000" class="btn-primary" target="_blank">
+        💬 Solicitar Orçamento
+      </a>
+      <a href="#loja" class="btn-secondary">
+        📸 Ver a Loja →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">+2k</div>
+    <div class="stat-label">Clientes atendidos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">98%</div>
+    <div class="stat-label">Satisfação garantida</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24h</div>
+    <div class="stat-label">Prazo médio de reparo</div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+
+<section id="servicos">
+  <div class="reveal">
+    <span class="section-tag">O que fazemos</span>
+    <h2>Serviços que <em>resolvem</em></h2>
+    <p class="section-sub">Do conserto de tela à proteção com película, cubrimos tudo que o seu celular precisa.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="svc-icon">🖥️</div>
+      <div class="svc-title">Troca de Tela</div>
+      <div class="svc-desc">Telas originais e compatíveis para as principais marcas. Serviço rápido com garantia.</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🛡️</div>
+      <div class="svc-title">Película Hidrogel</div>
+      <div class="svc-desc">Referência em aplicação de películas hidrogel. Proteção máxima sem perder sensibilidade.</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🔋</div>
+      <div class="svc-title">Troca de Bateria</div>
+      <div class="svc-desc">Baterias de qualidade para devolver a autonomia do seu dispositivo. Rápido e confiável.</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">⚡</div>
+      <div class="svc-title">Conector de Carga</div>
+      <div class="svc-desc">Conector solto ou danificado? Substituímos com precisão para você carregar sem problemas.</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">💧</div>
+      <div class="svc-title">Dano por Água</div>
+      <div class="svc-desc">Diagnóstico completo e limpeza especializada para aparelhos com dano por líquido.</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🔍</div>
+      <div class="svc-title">Diagnóstico Grátis</div>
+      <div class="svc-desc">Traga seu aparelho! Fazemos diagnóstico sem custo e orçamento sem compromisso.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARROSSEL DA LOJA -->
+
+<section id="loja" class="carousel-section">
+  <div class="reveal">
+    <span class="section-tag">Nossa loja</span>
+    <h2>Venha nos <em>visitar</em></h2>
+    <p class="section-sub">Um espaço organizado, moderno e preparado para atender você com excelência em Nova Iguaçu.</p>
+  </div>
+  <div class="carousel-wrap reveal">
+    <div class="carousel-track-outer">
+      <div class="carousel-track" id="carouselTrack">
+
+```
+    <div class="carousel-slide slide-1">
+      <div class="slide-bg">
+        <div class="slide-placeholder-icon">🏪</div>
+        <div class="slide-placeholder-text">ADICIONE FOTO DA FACHADA</div>
+      </div>
+      <div class="slide-label">
+        <div>
+          <div class="slide-label-title">Fachada da Loja</div>
+          <div class="slide-label-sub">Nova Iguaçu · RJ</div>
+        </div>
+        <span>📍</span>
+      </div>
+    </div>
+
+    <div class="carousel-slide slide-2">
+      <div class="slide-bg">
+        <div class="slide-placeholder-icon">🔧</div>
+        <div class="slide-placeholder-text">ADICIONE FOTO DO BALCÃO</div>
+      </div>
+      <div class="slide-label">
+        <div>
+          <div class="slide-label-title">Bancada de Trabalho</div>
+          <div class="slide-label-sub">Equipamentos profissionais</div>
+        </div>
+        <span>🛠️</span>
+      </div>
+    </div>
+
+    <div class="carousel-slide slide-3">
+      <div class="slide-bg">
+        <div class="slide-placeholder-icon">🛡️</div>
+        <div class="slide-placeholder-text">ADICIONE FOTO DAS PELÍCULAS</div>
+      </div>
+      <div class="slide-label">
+        <div>
+          <div class="slide-label-title">Expositores de Películas</div>
+          <div class="slide-label-sub">Hidrogel premium para todas as marcas</div>
+        </div>
+        <span>✨</span>
+      </div>
+    </div>
+
+    <div class="carousel-slide slide-4">
+      <div class="slide-bg">
+        <div class="slide-placeholder-icon">📱</div>
+        <div class="slide-placeholder-text">ADICIONE FOTO DOS REPAROS</div>
+      </div>
+      <div class="slide-label">
+        <div>
+          <div class="slide-label-title">Área de Reparo</div>
+          <div class="slide-label-sub">Precisão em cada detalhe</div>
+        </div>
+        <span>⚡</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="carousel-controls">
+  <button class="carousel-btn" onclick="carouselPrev()">&#8592;</button>
+  <div class="carousel-dots" id="carouselDots"></div>
+  <button class="carousel-btn" onclick="carouselNext()">&#8594;</button>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- PELÍCULAS HIDROGEL -->
+
+<section id="peliculas" class="pelicula-section">
+  <div class="pelicula-grid">
+    <div class="pelicula-visual reveal">
+      <div class="pv-icon">🛡️</div>
+      <div class="pv-text">ADICIONE FOTO DA APLICAÇÃO<br>DE PELÍCULA</div>
+    </div>
+    <div class="reveal">
+      <span class="section-tag">Diferencial</span>
+      <h2>Referência em<br><em>Películas Hidrogel</em></h2>
+      <p class="section-sub">Aplicação profissional sem bolhas, sem poeira. Proteção completa que preserva a sensibilidade e o visual original do seu celular.</p>
+      <ul class="pelicula-list">
+        <li>Aplicação sem bolhas garantida</li>
+        <li>Compatível com todas as marcas</li>
+        <li>Proteção total: frente, verso e câmeras</li>
+        <li>Resistente a impactos e riscos</li>
+        <li>Transparência cristalina</li>
+        <li>Garantia na aplicação</li>
+      </ul>
+      <div style="margin-top:1.8rem;">
+        <a href="https://wa.me/5521900000000" class="btn-primary" target="_blank">📲 Agendar Aplicação</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+
+<section class="highlights">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+    <span class="section-tag">Por que a VitorCell</span>
+    <h2>O que nos <em>diferencia</em></h2>
+  </div>
+  <div class="highlights-grid">
+    <div class="hl-card reveal">
+      <div class="hl-icon">⚡</div>
+      <div class="hl-title">Serviço Rápido</div>
+      <div class="hl-sub">A maioria dos reparos em menos de 24h</div>
+    </div>
+    <div class="hl-card reveal">
+      <div class="hl-icon">🔒</div>
+      <div class="hl-title">Garantia nos Serviços</div>
+      <div class="hl-sub">Todos os nossos reparos têm garantia</div>
+    </div>
+    <div class="hl-card reveal">
+      <div class="hl-icon">💎</div>
+      <div class="hl-title">Peças de Qualidade</div>
+      <div class="hl-sub">Somente peças originais ou certificadas</div>
+    </div>
+    <div class="hl-card reveal">
+      <div class="hl-icon">🤝</div>
+      <div class="hl-title">Atendimento Humano</div>
+      <div class="hl-sub">Transparência total do diagnóstico ao reparo</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+
+<section id="depoimentos" class="testimonials">
+  <div class="reveal">
+    <span class="section-tag">Clientes</span>
+    <h2>O que estão <em>falando</em></h2>
+    <p class="section-sub">A satisfação dos nossos clientes é a nossa maior conquista.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Fiz a troca de tela do meu iPhone aqui e ficou perfeito! Rápido, preço justo e atendimento excelente. Super recomendo!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">AM</div>
+        <div>
+          <div class="testi-name">Ana Maria S.</div>
+          <div class="testi-since">Cliente fiel · Nova Iguaçu</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"A película hidrogel ficou impecável, sem nenhuma bolha. Melhor serviço de película da cidade, sem dúvida!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">RC</div>
+        <div>
+          <div class="testi-name">Roberto C.</div>
+          <div class="testi-since">Cliente · Nova Iguaçu</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Molhei meu celular e achei que tinha perdido. Trouxe aqui, fizeram o diagnóstico rápido e recuperaram tudo. Muito obrigada!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">JP</div>
+        <div>
+          <div class="testi-name">Juliana P.</div>
+          <div class="testi-since">Cliente · Nova Iguaçu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+
+<div class="cta-banner">
+  <h2>Precisa de um <em>orçamento?</em></h2>
+  <p>Manda mensagem agora mesmo! Atendemos pelo WhatsApp.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/5521900000000" class="btn-primary" target="_blank">💬 Falar pelo WhatsApp</a>
+    <a href="#contato" class="btn-secondary">📍 Como chegar →</a>
+  </div>
+</div>
+
+<!-- LOCALIZAÇÃO -->
+
+<section id="contato" class="location-section">
+  <div class="reveal">
+    <span class="section-tag">Onde estamos</span>
+    <h2>Visite nossa <em>loja</em></h2>
+    <p class="section-sub">Estamos em Nova Iguaçu, prontos para atender você!</p>
+  </div>
+  <div class="location-grid">
+    <div class="location-info reveal">
+      <div class="loc-item">
+        <div class="loc-icon">📍</div>
+        <div>
+          <div class="loc-title">Endereço</div>
+          <div class="loc-value">Rua Exemplo, 123<br>Centro, Nova Iguaçu -- RJ</div>
+        </div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">🕐</div>
+        <div>
+          <div class="loc-title">Horário de Funcionamento</div>
+          <div class="loc-value">Seg -- Sex: 9h às 18h<br>Sábado: 9h às 13h</div>
+        </div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">📱</div>
+        <div>
+          <div class="loc-title">WhatsApp</div>
+          <div class="loc-value">(21) 9 0000-0000</div>
+        </div>
+      </div>
+      <div class="loc-item">
+        <div class="loc-icon">📸</div>
+        <div>
+          <div class="loc-title">Instagram</div>
+          <div class="loc-value">@vitorcell</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder reveal">
+      <div class="map-pin">📍</div>
+      <div class="map-text">NOVA IGUAÇU · RJ<br>Clique para ver no mapa</div>
+      <a href="https://maps.google.com" class="map-btn" target="_blank">🗺️ Abrir no Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">Vitor<span>Cell</span></div>
+      <p>Assistência técnica especializada em Nova Iguaçu. Referência em películas hidrogel e troca de tela.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">📸</a>
+        <a href="https://wa.me/5521900000000" class="social-btn" target="_blank">💬</a>
+        <a href="#" class="social-btn">🎵</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="#">Troca de Tela</a></li>
+        <li><a href="#">Película Hidrogel</a></li>
+        <li><a href="#">Troca de Bateria</a></li>
+        <li><a href="#">Dano por Água</a></li>
+        <li><a href="#">Diagnóstico Grátis</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Atendimento</h4>
+      <ul>
+        <li><a href="https://wa.me/5521900000000">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Nova Iguaçu -- RJ</a></li>
+        <li><a href="#">Seg--Sex 9h--18h</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 VitorCell. Todos os direitos reservados.</p>
+    <p>Desenvolvido por <a href="#">Axia VF</a></p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+
+<a href="https://wa.me/5521900000000" class="wpp-float" target="_blank" title="Fale pelo WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// ── MOBILE MENU ──
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+
+// ── CAROUSEL ──
+const track = document.getElementById('carouselTrack');
+const slides = track.querySelectorAll('.carousel-slide');
+const dotsContainer = document.getElementById('carouselDots');
+let current = 0;
+let autoTimer;
+
+// build dots
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsContainer.appendChild(d);
+});
+
+function goTo(n) {
+  current = (n + slides.length) % slides.length;
+  track.style.transform = 'translateX(-' + (current * 100) + '%)';
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  resetAuto();
+}
+
+function carouselNext() { goTo(current + 1); }
+function carouselPrev() { goTo(current - 1); }
+
+function resetAuto() {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(() => goTo(current + 1), 4500);
+}
+resetAuto();
+
+// touch swipe
+let touchStartX = 0;
+track.parentElement.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+track.parentElement.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) diff > 0 ? carouselNext() : carouselPrev();
+});
+
+// ── SCROLL REVEAL ──
+const revealItems = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealItems.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

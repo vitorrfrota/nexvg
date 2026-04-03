@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoPrime — Veículos de Excelência</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="publicSite">
+
+<header>
+  <div id="headerLogo"><span class="logo-placeholder">AUTO<span>PRIME</span></span></div>
+  <nav>
+    <a href="#estoque">Estoque</a>
+    <a href="#por-que-nos">Diferenciais</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#estoque" onclick="closeMenu()">Estoque</a>
+  <a href="#por-que-nos" onclick="closeMenu()">Diferenciais</a>
+  <a href="#depoimentos" onclick="closeMenu()">Depoimentos</a>
+  <a href="#contato" onclick="closeMenu()">Contato</a>
+  <button class="btn-mobile-wa" onclick="wa();closeMenu()">💬 Falar com vendedor</button>
+</div>
+
+<!-- BANNER IDENTIDADE -->
+
+<section class="home" id="home">
+    <div class="carousel">
+
+
+  <div class="slidee activee">
+    <img src="images/faixada.jpg" alt="reparo">
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="hero-badge">Confiança</span>
+      <h1>Procedência garantida</h1>
+      <p>Veículos revisados, histórico transparente e compra segura do início ao fim.</p>
+    </div>
+  </div>
+
+  <div class="slidee">
+    <img src="images/faixada2.jpg" alt="diagnostico">
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="hero-badge">Oportunidade</span>
+      <h1>Qualidade indiscutível</h1>
+      <p>Carros selecionados com ótimo custo-benefício e condições facilitadas.</p>
+    </div>
+  </div>
+
+  <div class="slidee">
+    <img src="images/faixada3.jpg" alt="Revisao">
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="hero-badge">Facilidade</span>
+      <h1>Compre sem complicação</h1>
+      <p>Financiamento rápido e suporte completo pra você sair dirigindo.</p>
+    </div>
+  </div>
+
+  <div class="dotss">
+    <span class="dott activ" data-index="0"></span>
+    <span class="dott" data-index="1"></span>
+    <span class="dott" data-index="2"></span>
+  </div>
+
+</div>
+
+
+  </section>
+
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-badge">⚡ Estoque renovado semanalmente</div>
+  <h1>Dirija o carro<br>dos seus <em>sonhos</em></h1>
+  <p class="hero-sub">Curadoria exclusiva de veículos premium com procedência garantida, financiamento facilitado e entrega em todo o Brasil.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('estoque').scrollIntoView({behavior:'smooth'})">Ver estoque completo</button>
+    <button class="btn-outline" onclick="wa()">Consultor exclusivo</button>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num" id="cnt">0+</div><div class="hero-stat-label">Veículos disponíveis</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">98%</div><div class="hero-stat-label">Clientes satisfeitos</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">12+</div><div class="hero-stat-label">Anos no mercado</div></div>
+  </div>
+  <div class="hero-scroll"><span>Explorar</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-track">
+    <div class="trust-item"><div class="trust-icon">🔒</div><span>Procedência 100% verificada</span></div>
+    <div class="trust-item"><div class="trust-icon">💳</div><span>Financiamento em até 60x</span></div>
+    <div class="trust-item"><div class="trust-icon">📋</div><span>Documentação na hora</span></div>
+    <div class="trust-item"><div class="trust-icon">🔒</div><span>Procedência 100% verificada</span></div>
+    <div class="trust-item"><div class="trust-icon">💳</div><span>Financiamento em até 60x</span></div>
+    <div class="trust-item"><div class="trust-icon">📋</div><span>Documentação na hora</span></div>
+  </div>
+</div>
+
+<section id="estoque">
+  <div class="catalog-header">
+    <div>
+      <div class="section-label">Nosso Estoque</div>
+      <h2 class="section-title">Veículos <em>disponíveis</em></h2>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="doFilter('all',this)">Todos</button>
+      <button class="filter-btn" onclick="doFilter('novo',this)">Novos</button>
+      <button class="filter-btn" onclick="doFilter('usado',this)">Usados</button>
+      <button class="filter-btn" onclick="doFilter('destaque',this)">Destaques</button>
+    </div>
+  </div>
+  <div class="vehicles-grid" id="grid"></div>
+</section>
+
+<section id="por-que-nos">
+  <div class="section-label">Nossos diferenciais</div>
+  <h2 class="section-title">Por que a <em>AutoPrime?</em></h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><div class="why-icon">🛡️</div><div class="why-title">Garantia Real</div><div class="why-desc">Todos os veículos passam por inspeção completa com 200+ pontos verificados. Garantia de fábrica ou estendida disponível.</div></div>
+    <div class="why-card"><div class="why-num">02</div><div class="why-icon">💰</div><div class="why-title">Melhor Financiamento</div><div class="why-desc">Parceria com os melhores bancos do país. Taxa a partir de 0,79% a.m. e aprovação em até 2 horas.</div></div>
+    <div class="why-card"><div class="why-num">03</div><div class="why-icon">🤝</div><div class="why-title">Transparência Total</div><div class="why-desc">Laudos completos, histórico do veículo, sem surpresas. O que você vê é o que você leva.</div></div>
+    <div class="why-card"><div class="why-num">04</div><div class="why-icon">⚡</div><div class="why-title">Processo Ágil</div><div class="why-desc">Da escolha à chave na mão em menos de 24h. Sem burocracia desnecessária.</div></div>
+    <div class="why-card"><div class="why-num">05</div><div class="why-icon">♻️</div><div class="why-title">Aceite seu Usado</div><div class="why-desc">Avaliamos e aceitamos seu carro atual como parte do pagamento. Proposta justa e transparente.</div></div>
+  </div>
+</section>
+
+<section id="depoimentos">
+  <div class="section-label">O que dizem nossos clientes</div>
+  <h2 class="section-title">Histórias de <em>sucesso</em></h2>
+  <div class="testi-summary">
+    <div class="testi-avg-num">4.9</div>
+    <div><div class="testi-avg-stars">★★★★★</div><div class="testi-avg-label">Avaliação média · 127 avaliações</div></div>
+  </div>
+  <div class="testi-outer">
+    <button class="testi-side-btn prev" id="tPrev" onclick="tNav(-1)">‹</button>
+    <div class="testi-viewport">
+      <div class="testi-track" id="tTrack">
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Processo incrível do início ao fim. Em menos de um dia saí com meu carro novo. A equipe foi transparente e super atenciosa!"</div><div class="testi-author"><div class="testi-avatar">RM</div><div><div class="testi-name">Ricardo Mendes</div><div class="testi-car">🚗 BMW Série 3</div><div class="testi-date">São Paulo · há 2 dias</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Financiamento aprovado em 2 horas com ótima taxa. O carro chegou em casa exatamente como mostrado nas fotos. Confiança total!"</div><div class="testi-author"><div class="testi-avatar">CF</div><div><div class="testi-name">Camila Fonseca</div><div class="testi-car">🚗 Toyota Corolla</div><div class="testi-date">Rio de Janeiro · há 1 semana</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Aceitaram meu carro por um valor justo e a troca foi rápida e sem burocracia. Processo todo online, muito prático!"</div><div class="testi-author"><div class="testi-avatar">AT</div><div><div class="testi-name">André Torres</div><div class="testi-car">🚗 Honda Civic</div><div class="testi-date">Curitiba · há 2 semanas</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Comprei meu Jeep Compass sem sair de casa. Tudo online, entrega na porta e documentação resolvida em tempo recorde!"</div><div class="testi-author"><div class="testi-avatar">JL</div><div><div class="testi-name">Julia Lima</div><div class="testi-car">🚗 Jeep Compass</div><div class="testi-date">Belo Horizonte · há 3 semanas</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Atendimento impecável. Me ajudaram a escolher o carro certo pro meu perfil. O consultor foi honesto e não empurrou nada."</div><div class="testi-author"><div class="testi-avatar">MS</div><div><div class="testi-name">Marcos Silva</div><div class="testi-car">🚗 Volvo XC60</div><div class="testi-date">Porto Alegre · há 1 mês</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars">★★★★★</div><div class="testi-text">"Já é a segunda vez que compro aqui. Preço justo, carro sempre como anunciado e atendimento pós-venda excelente!"</div><div class="testi-author"><div class="testi-avatar">PR</div><div><div class="testi-name">Patrícia Rocha</div><div class="testi-car">🚗 Mercedes GLC</div><div class="testi-date">São Paulo · há 1 mês</div></div></div></div>
+      </div>
+    </div>
+    <button class="testi-side-btn next" id="tNext" onclick="tNav(1)">›</button>
+  </div>
+  <div class="testi-dots" id="tDots"></div>
+</section>
+
+<div class="cta-strip">
+  <h2>Pronto para dirigir<br>seu próximo <em>veículo?</em></h2>
+  <p>Fale agora com um de nossos consultores e receba uma proposta personalizada sem compromisso.</p>
+  <div class="cta-actions">
+    <button class="btn-wa" onclick="wa()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chamar no WhatsApp
+    </button>
+    <button class="btn-primary" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Enviar mensagem</button>
+  </div>
+</div>
+
+<section id="contato">
+  <div class="contact-grid">
+    <div>
+      <div class="section-label">Fale conosco</div>
+      <h2 class="section-title">Estamos<br>aqui para <em>ajudar</em></h2>
+      <div class="contact-info" style="margin-top:40px">
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Endereço</div><div class="contact-value">Av. dos Veículos, 1200</div><div class="contact-sub">São Paulo, SP — Seg a Sáb, 8h–20h</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Telefone</div><div class="contact-value">(11) 99999-0000</div><div class="contact-sub">WhatsApp disponível 24h</div></div></div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">E-mail</div><div class="contact-value">vendas@autoprime.com.br</div><div class="contact-sub">Respondemos em até 2 horas</div></div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="contact-label">Horário</div><div class="contact-value">Seg–Sáb: 8h às 20h</div><div class="contact-sub">Domingo: 10h às 16h</div></div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Solicite uma proposta</h3>
+      <div class="form-row">
+        <div class="form-g"><label>Nome completo</label><input class="form-input" type="text" placeholder="Seu nome"></div>
+        <div class="form-g"><label>WhatsApp</label><input class="form-input" type="tel" placeholder="(11) 99999-0000"></div>
+      </div>
+      <div class="form-g"><label>E-mail</label><input class="form-input" type="email" placeholder="seu@email.com"></div>
+      <div class="form-g"><label>Veículo de interesse</label><input class="form-input" type="text" placeholder="Ex: BMW X5, Toyota Corolla..."></div>
+      <div class="form-g"><label>Mensagem</label><textarea class="form-input" rows="3" placeholder="Conte mais sobre o que procura..." style="resize:vertical"></textarea></div>
+      <button class="btn-submit" onclick="notify('Proposta enviada! Em breve entraremos em contato. ✓')">Enviar proposta agora</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div id="footerLogo"><span class="logo-placeholder">AUTO<span>PRIME</span></span></div>
+      <div class="footer-desc">Mais de 12 anos conectando pessoas aos melhores veículos do mercado. Excelência em cada negócio.</div>
+      <div style="margin-top:20px"><span onclick="openLogin()" style="font-size:11px;color:rgba(255,255,255,.1);cursor:pointer;user-select:none;">● área restrita</span></div>
+    </div>
+    <div class="footer-col"><h4>Estoque</h4><a href="#">Carros novos</a><a href="#">Seminovos</a><a href="#">Importados</a><a href="#">SUVs</a><a href="#">Sedans</a></div>
+    <div class="footer-col"><h4>Serviços</h4><a href="#">Financiamento</a><a href="#">Consórcio</a><a href="#">Avaliação</a><a href="#">Revisão</a><a href="#">Entrega</a></div>
+    <div class="footer-col"><h4>Empresa</h4><a href="#">Sobre nós</a><a href="#">Trabalhe conosco</a><a href="#">Blog</a><a href="#">Contato</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AutoPrime. Todos os direitos reservados.</span>
+    <span>CNPJ 00.000.000/0001-00 · CRECI SP 00000</span>
+  </div>
+</footer>
+
+<button class="float-wa" onclick="wa()">
+  <div class="wa-ring"></div>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+</div>
+
+<!-- ADMIN -->
+
+<div class="admin-page" id="adminPage">
+  <div class="admin-header">
+    <h1>Painel <em>AutoPrime</em></h1>
+    <button class="btn-back" onclick="closeAdmin()">← Voltar ao site</button>
+  </div>
+  <div class="admin-body">
+
+```
+<div class="admin-section-title" style="margin-bottom:8px">Logo da <em>loja</em></div>
+<p class="admin-sub">Aparece no cabeçalho e rodapé do site.</p>
+<div class="admin-form" style="margin-bottom:40px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+  <div id="logoPreviewWrap" style="width:160px;height:72px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+    <span style="font-size:12px;color:var(--muted)">Sem logo</span>
+  </div>
+  <div>
+    <label style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--black);padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+      📷 Escolher logo
+      <input type="file" accept="image/*" style="display:none" onchange="uploadLogo(this.files[0])">
+    </label>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;">PNG com fundo transparente. Altura recomendada: 80px.</p>
+  </div>
+</div>
+
+<div class="admin-section-title" style="margin-bottom:8px">Fotos da <em>loja</em></div>
+<p class="admin-sub">3 fotos que aparecem no banner do topo — mostre o espaço, equipe ou diferenciais.</p>
+<div class="admin-form" style="margin-bottom:40px;">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:8px;">Foto 1</div>
+      <label style="display:block;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:2px dashed rgba(201,168,76,.3);background:var(--surface);cursor:pointer;">
+        <div id="idPrev0" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-size:12px;"><span style="font-size:24px">📷</span><span>Escolher</span></div>
+        <input type="file" accept="image/*" style="display:none" onchange="uploadIdentity(0,this.files[0])">
+      </label>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:8px;">Foto 2</div>
+      <label style="display:block;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:2px dashed rgba(201,168,76,.3);background:var(--surface);cursor:pointer;">
+        <div id="idPrev1" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-size:12px;"><span style="font-size:24px">📷</span><span>Escolher</span></div>
+        <input type="file" accept="image/*" style="display:none" onchange="uploadIdentity(1,this.files[0])">
+      </label>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:8px;">Foto 3</div>
+      <label style="display:block;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:2px dashed rgba(201,168,76,.3);background:var(--surface);cursor:pointer;">
+        <div id="idPrev2" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-size:12px;"><span style="font-size:24px">📷</span><span>Escolher</span></div>
+        <input type="file" accept="image/*" style="display:none" onchange="uploadIdentity(2,this.files[0])">
+      </label>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:14px;">Resolução recomendada: 1600×900px.</p>
+</div>
+
+<div class="admin-section-title">Adicionar <em>veículo</em></div>
+<p class="admin-sub">Preencha os dados e faça o upload das fotos. O veículo aparece imediatamente no site.</p>
+<div class="admin-form">
+  <div class="form-row">
+    <div class="form-g"><label>Marca *</label><input class="form-input" id="a-brand" placeholder="Ex: BMW"></div>
+    <div class="form-g"><label>Modelo *</label><input class="form-input" id="a-model" placeholder="Ex: X5"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-g"><label>Versão</label><input class="form-input" id="a-version" placeholder="Ex: xDrive40i Sport"></div>
+    <div class="form-g"><label>Ano *</label><input class="form-input" id="a-year" type="number" placeholder="2024"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-g"><label>Quilometragem</label><input class="form-input" id="a-km" placeholder="Ex: 15.000"></div>
+    <div class="form-g"><label>Preço (R$) *</label><input class="form-input" id="a-price" placeholder="Ex: 480000"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-g"><label>Câmbio</label><select class="form-select" id="a-cambio"><option>Automático</option><option>Manual</option><option>CVT</option><option>Automatizado</option></select></div>
+    <div class="form-g"><label>Combustível</label><select class="form-select" id="a-fuel"><option>Flex</option><option>Gasolina</option><option>Diesel</option><option>Elétrico</option><option>Híbrido</option></select></div>
+  </div>
+  <div class="form-row">
+    <div class="form-g"><label>Cor</label><input class="form-input" id="a-color" placeholder="Ex: Preto"></div>
+    <div class="form-g"><label>Status</label><select class="form-select" id="a-status"><option value="usado">Usado</option><option value="novo">Novo</option><option value="destaque">⭐ Destaque</option></select></div>
+  </div>
+  <div class="form-g"><label>Descrição / Opcionais</label><textarea class="form-textarea" id="a-desc" placeholder="Descreva os opcionais, estado, diferenciais..."></textarea></div>
+  <div class="form-g">
+    <label>Fotos <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(a 1ª foto será a capa)</span></label>
+    <div class="up-zone" id="upZone" onclick="document.getElementById('aFile').click()" ondrop="dropF(event)" ondragover="dragOv(event)" ondragleave="dragLv()">
+      <div class="up-ico">📷</div>
+      <p><strong>Clique</strong> ou arraste as fotos aqui</p>
+      <p style="font-size:11px;margin-top:4px">A 1ª imagem será a capa do card</p>
+    </div>
+    <input type="file" id="aFile" multiple accept="image/*" style="display:none" onchange="handleF(this.files)">
+    <div class="img-prevs" id="aPrevs"></div>
+  </div>
+  <div class="admin-form-footer">
+    <button class="btn-reset" onclick="resetForm()">Limpar</button>
+    <button class="btn-save" onclick="saveVehicle()">Publicar veículo no site</button>
+  </div>
+</div>
+<div class="admin-list-title">Veículos no estoque (<span id="adminCount">0</span>)</div>
+<div class="admin-list" id="adminList"></div>
+```
+
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+
+<div class="modal-overlay" id="detailOverlay">
+  <div class="detail-modal">
+    <div class="gal-wrap">
+      <button class="gal-close" onclick="closeDetail()">✕</button>
+      <div id="galContent"></div>
+      <button class="gal-nav prev" id="gPrev" onclick="galNav(-1)">‹</button>
+      <button class="gal-nav next" id="gNext" onclick="galNav(1)">›</button>
+      <div class="gal-counter" id="galCtr"></div>
+    </div>
+    <div class="gal-thumbs" id="galThumbs"></div>
+    <div class="det-body" id="detBody"></div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+
+<div class="modal-overlay" id="loginOverlay">
+  <div class="login-modal">
+    <div style="font-size:36px;margin-bottom:16px">🔑</div>
+    <h2>Área <em style="font-style:italic;color:var(--gold)">restrita</em></h2>
+    <p>Acesso exclusivo para administradores</p>
+    <input class="login-input" type="password" id="loginPass" placeholder="Digite a senha" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-login" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="loginErr">Senha incorreta.</div>
+    <div style="margin-top:20px"><button onclick="closeLogin()" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;">Cancelar</button></div>
+  </div>
+</div>
+
+<div class="notif" id="notif"><div class="notif-dot"></div><span id="notif-txt"></span></div>
+
+
+<script src="script.js"></script>
+</body>
+</html

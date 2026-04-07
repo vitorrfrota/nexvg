@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nexus Oficina Especializada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===== HEADER MOBILE ===== -->
+
+  <header class="header header-mobile">
+    <div class="geral">
+      <div class="geral1">
+        <div class="instaa">
+          <a href="https://www.instagram.com/nexus.oficina/" target="_blank">
+            <img src="images/insta.jpg" class="insta" alt="instagram"/>
+          </a>
+        </div>
+        <div class="logoo">
+          <img src="images/logo.jpg" alt="Nexus Oficina" class="logo" />
+        </div>
+        <div class="menuu">
+          <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+
+  <div class="buttons">
+    <button class="orcar" onclick="abrirWpp()">PEDIR ORÇAMENTO</button>
+    <button class="avali" onclick="irParaAvaliacoes()">DEPOIMENTOS DE CLIENTES</button>
+  </div>
+</div>
+
+
+  </header>
+
+  <!-- ===== HEADER DESKTOP ===== -->
+
+  <header class="header header-desktop">
+    <div class="header-desktop-inner">
+
+
+  <!-- Logo -->
+  <div class="hd-logo">
+    <a href="#home">
+      <img src="images/logo.jpg" alt="Nexus Oficina" class="logo-desktop" />
+    </a>
+  </div>
+
+  <!-- Nav central -->
+  <nav class="hd-nav">
+    <a href="#home">Home</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#quem-somos">Quem Somos</a>
+    <a href="#contato">Fale Conosco</a>
+    <a href="#localizacao">Como Chegar</a>
+  </nav>
+
+  <!-- Ações direita -->
+  <div class="hd-actions">
+    <a href="https://www.instagram.com/nexus.oficina/" target="_blank" class="hd-insta">
+      <img src="images/insta.jpg" alt="Instagram" />
+      <span>@nexus.oficina</span>
+    </a>
+    <button class="hd-btn-orcamento" onclick="abrirWpp()">Pedir Orçamento</button>
+  </div>
+
+</div>
+
+
+  </header>
+
+  <!-- ===== MENU MOBILE ===== -->
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" id="closeMenu">✕</button>
+    <div class="mobile-menu-logo">
+      <img src="images/logo.jpg" alt="Nexus Oficina" />
+    </div>
+    <a href="#home">Home</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#quem-somos">Quem Somos</a>
+    <a href="#contato">Fale Conosco</a>
+    <a href="#localizacao">Como Chegar</a>
+    <button class="mobile-wpp-btn" onclick="abrirWpp()">📲 Pedir Orçamento</button>
+  </nav>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- ===== HERO ===== -->
+
+  <section class="home" id="home">
+    <div class="carousel">
+
+
+  <div class="slidee activee">
+    <img src="images/tecnico.jpg" alt="reparo">
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="hero-badge">Alta Tecnologia</span>
+      <h1>Reparo de Módulo</h1>
+      <p>Diagnóstico e recuperação de módulos eletrônicos automotivo com análise técnica completa.</p>
+    </div>
+  </div>
+
+  <div class="slidee">
+    <img src="images/foto3.jpg" alt="diagnostico">
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="hero-badge">Tecnologia de Ponta</span>
+      <h1>Diagnóstico Avançado</h1>
+      <p>Identificação precisa de falhas com equipamentos e métodos de diagnóstico profissional.</p>
+    </div>
+  </div>
+
+  <div class="slidee">
+    <img src="images/foto4.jpg" alt="Revisao">
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="hero-badge">Alta Performance</span>
+      <h1>Revisão PREMIUM</h1>
+      <p>Verificação e inspeção técnica completa para prevenir falhas e manter o máximo desempenho.</p>
+    </div>
+  </div>
+
+  <div class="dotss">
+    <span class="dott activ" data-index="0"></span>
+    <span class="dott" data-index="1"></span>
+    <span class="dott" data-index="2"></span>
+  </div>
+
+</div>
+
+
+  </section>
+
+  <!-- ===== QUEM SOMOS ===== -->
+
+  <section class="quem-somos" id="quem-somos">
+    <h2 class="section-title" data-reveal>Quem Somos | Nexus Oficina</h2>
+
+
+<div class="qs-layout">
+
+  <!-- Carrossel moderno -->
+  <div class="qs-carousel-wrap" data-reveal data-delay="100">
+    <div class="qs-carousel">
+      <div class="qs-track" id="qsTrack">
+        <div class="qs-slide active">
+          <img src="images/foto1.jpg" alt="Nexus Oficina">
+        </div>
+        <div class="qs-slide">
+          <img src="images/foto2.jpg" alt="Nexus Oficina">
+        </div>
+        <div class="qs-slide">
+          <img src="images/foto3.jpg" alt="Nexus Oficina">
+        </div>
+        <div class="qs-slide">
+          <img src="images/foto4.jpg" alt="Nexus Oficina">
+        </div>
+        <div class="qs-slide">
+          <img src="images/foto5.jpg" alt="Nexus Oficina">
+        </div>
+      </div>
+      <!-- Setas -->
+      <button class="qs-arrow qs-prev" id="qsPrev" aria-label="Anterior">&#8592;</button>
+      <button class="qs-arrow qs-next" id="qsNext" aria-label="Próximo">&#8594;</button>
+    </div>
+    <!-- Dots modernos -->
+    <div class="qs-dots" id="qsDots"></div>
+  </div>
+
+  <!-- Texto com reveal -->
+  <div class="qs-text">
+    <p data-reveal data-delay="0">
+      Na Nexus Oficina, a paixão por motores e a busca pela excelência andam juntas. Somos especializados em oferecer soluções automotivas completas, combinando tecnologia de ponta com o conhecimento técnico de uma equipe apaixonada pelo que faz.
+    </p>
+    <p data-reveal data-delay="150">
+      Fundada com o objetivo de mudar a experiência de manutenção automotiva, a Nexus se consolidou como referência em diagnósticos precisos e reparos de alta qualidade.
+    </p>
+
+    <h3 data-reveal data-delay="250">Nossa Missão</h3>
+    <p data-reveal data-delay="300">
+      Conectar você a soluções automotivas eficientes e transparentes, assegurando a máxima performance e longevidade do seu veículo com um atendimento humanizado e justo.
+    </p>
+
+    <h3 data-reveal data-delay="400">Por que escolher a Nexus?</h3>
+    <ul class="qs-list" data-reveal data-delay="450">
+      <li>
+        <span class="qs-icon">⚙️</span>
+        <div>
+          <strong>Equipe Especializada</strong>
+          <span>Técnicos treinados e em constante atualização.</span>
+        </div>
+      </li>
+      <li>
+        <span class="qs-icon">🔬</span>
+        <div>
+          <strong>Tecnologia de Ponta</strong>
+          <span>Equipamentos modernos para diagnósticos precisos.</span>
+        </div>
+      </li>
+      <li>
+        <span class="qs-icon">🤝</span>
+        <div>
+          <strong>Transparência</strong>
+          <span>Orçamentos detalhados e respeito ao cliente.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+  </section>
+
+  <!-- ===== SERVIÇOS ===== -->
+
+  <section class="servicos" id="servicos">
+    <h2 class="section-title">Nossos Serviços</h2>
+
+
+<div class="servicos-grid">
+  <div class="servico-card">
+    <img src="images/airbag.jpg" alt="Airbag">
+    <h3>Airbag</h3>
+    <p></p>
+  </div>
+  <div class="servico-card">
+    <img src="images/abs.jpg" alt="ABS">
+    <h3>ABS</h3>
+    <p></p>
+  </div>
+  <div class="servico-card">
+    <img src="images/injecao.jpg" alt="Injeção Eletrônica">
+    <h3>Injeção Eletrônica</h3>
+    <p></p>
+  </div>
+  <div class="servico-card">
+    <img src="images/foto3.jpg" alt="Diagnóstico Avançado">
+    <h3>Diagnóstico Avançado</h3>
+    <p></p>
+  </div>
+  <div class="servico-card">
+    <img src="images/eletrica.jpg" alt="Elétrica em Geral">
+    <h3>Elétrica em Geral</h3>
+    <p></p>
+  </div>
+  <div class="servico-card">
+    <img src="images/cambio.jpg" alt="Câmbio Automático">
+    <h3>Câmbio Automático</h3>
+    <p></p>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- ===== AVALIAÇÕES ===== -->
+
+  <section class="avaliacoes" id="avaliacoes">
+    <h2 class="section-title">Avaliações Google</h2>
+
+
+<div class="nx2-carousel-wrapper">
+  <button class="nx2-arrow nx2-arrow-prev" id="nx2Prev" aria-label="Anterior">&#8592;</button>
+
+  <div class="nx2-carousel-container">
+    <div class="nx2-carousel-track" id="nx2Track">
+      <div class="nx2-slide">
+        <div class="nx2-slide-inner">
+          <img src="images/av1.jpg" alt="Avaliação 1">
+        </div>
+      </div>
+      <div class="nx2-slide">
+        <div class="nx2-slide-inner">
+          <img src="images/av2.jpg" alt="Avaliação 2">
+        </div>
+      </div>
+      <div class="nx2-slide">
+        <div class="nx2-slide-inner">
+          <img src="images/av3.jpg" alt="Avaliação 3">
+        </div>
+      </div>
+      <div class="nx2-slide">
+        <div class="nx2-slide-inner">
+          <img src="images/av4.jpg" alt="Avaliação 4">
+        </div>
+      </div>
+      <div class="nx2-slide">
+        <div class="nx2-slide-inner">
+          <img src="images/av5.jpg" alt="Avaliação 5">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="nx2-arrow nx2-arrow-next" id="nx2Next" aria-label="Próximo">&#8594;</button>
+</div>
+
+<div class="nx2-dots" id="nx2Dots"></div>
+
+<div class="btn-avali">
+  <a href="https://maps.app.goo.gl/9Kx8Cd5xXWcSMCdn7" class="btn-google" target="_blank">
+    ⭐ O que nossos clientes dizem no Google
+  </a>
+</div>
+
+
+  </section>
+
+  <!-- ===== CONTATO ===== -->
+
+  <section class="contato" id="contato">
+    <div class="contato-inner">
+      <h2 class="section-title section-title--light">Entre em Contato</h2>
+      <p>Nos relate o que está acontecendo com seu veículo, estamos prontos para solucionar seu problema.</p>
+      <a href="https://wa.me/5521998761020" class="cta-whatsapp2" target="_blank">
+        <span class="wpp-icon">💬</span>
+        Clique aqui e converse agora com nossa equipe
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== LOCALIZAÇÃO ===== -->
+
+  <section class="localizacao" id="localizacao">
+    <h2 class="section-title">Como Chegar</h2>
+    <div class="container-loc">
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.140868551797!2d-43.4004763!3d-22.834277200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x69230ad60679102b%3A0x7c1d9880936d6ec1!2sNexus%20Oficina!5e0!3m2!1spt-BR!2sbr!4v1771331122696!5m2!1spt-BR!2sbr"
+          width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <a href="https://maps.app.goo.gl/DvcF7Gc4eeiVGNXt5" class="btn-chegar" target="_blank">
+        📍 Estrada do Engenho Novo, 623
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+
+  <footer class="premium-footer">
+    <div class="footer-top">
+      <img src="images/logo.jpg" alt="Nexus Oficina" class="footer-logo">
+
+
+  <div class="footer-contact">
+    <p>📞 WhatsApp: (21) 99876-1020</p>
+    <p>📷 Instagram: @nexus.oficina</p>
+  </div>
+
+  <div class="footer-links">
+    <a href="#quem-somos">Sobre nós</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </div>
+
+  <p class="copyright">©️ 2026 Nexus Oficina. Todos os direitos reservados.</p>
+</div>
+
+<div class="footer-dev">
+  <div class="dev-left">
+    <p>Site desenvolvido por</p>
+    <h3>Vitor Frota</h3>
+  </div>
+  <div class="dev-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="mailto:contato@vitorfrota.com">Email</a>
+  </div>
+</div>
+
+
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -507,13 +507,16 @@ section { position: relative; z-index: 1; }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 2px;
 }
 .service-card {
+  display:flex;
+  align-items: center;
+  gap: 20px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 40px 32px;
+  padding: 24px 28px;
   position: relative;
   transition: background .3s, border-color .3s;
   overflow: hidden;

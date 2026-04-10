@@ -330,6 +330,15 @@ nav a:hover { color: var(--gold); }
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
 }
+.seg-iconr {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: rgba(61,221,232,.08);
+  border: 1px solid var(--gold-dk);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
 
 .seg-body { flex: 1; }
 .seg-title {

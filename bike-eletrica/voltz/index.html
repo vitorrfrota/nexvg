@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VOLTZ — Bicicletas Elétricas Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+:root {
+  --gold:    #C9A84C;
+  --gold-lt: #E2C47A;
+  --black:   #080808;
+  --dark:    #0F0F0F;
+  --dark2:   #141414;
+  --dark3:   #1C1C1C;
+  --off:     #F5F0E8;
+  --gray:    #888;
+  --white:   #FFFFFF;
+  --radius:  4px;
+  --transition: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--black);
+  color: var(--off);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+#cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(201,168,76,0.5);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease;
+}
+body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 18px; height: 18px; background: var(--gold-lt); }
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000; opacity: 0.5;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6rem 4rem;
+  transition: background var(--transition), padding var(--transition), backdrop-filter var(--transition);
+}
+nav.scrolled {
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(18px);
+  padding: 1rem 4rem;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.85rem; font-weight: 300; letter-spacing: 0.35em;
+  color: var(--off); text-decoration: none;
+  display: flex; align-items: center;
+}
+.nav-logo span { color: var(--gold); }
+/* Quando usar imagem como logo */
+.nav-logo img {
+  height: 42px; width: auto;
+  object-fit: contain;
+  display: block;
+}
+nav.scrolled .nav-logo img { height: 34px; transition: height var(--transition); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none;
+  transition: color var(--transition);
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width var(--transition);
+}
+.nav-links a:hover { color: var(--off); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid var(--gold); color: var(--gold);
+  padding: 0.65rem 1.6rem; text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+}
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+/* hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+.hamburger span { display: block; width: 24px; height: 1px; background: var(--off); transition: var(--transition); }
+.hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(8,8,8,0.98); flex-direction: column;
+  align-items: center; justify-content: center; gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300;
+  letter-spacing: 0.1em; color: var(--off); text-decoration: none;
+  transition: color var(--transition);
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  padding: 8rem 4rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 75% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%);
+}
+.hero-line {
+  position: absolute; top: 0; left: 50%;
+  width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.15), transparent);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-tag {
+  display: inline-block;
+  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); border-left: 2px solid var(--gold);
+  padding-left: 0.8rem; margin-bottom: 2rem;
+  opacity: 0; transform: translateX(-20px);
+  animation: fadeSlideR 0.8s ease 0.3s forwards;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
+  margin-bottom: 1.8rem;
+  opacity: 0; transform: translateY(30px);
+  animation: fadeUp 0.9s ease 0.5s forwards;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-desc {
+  font-size: 0.8rem; line-height: 1.9; letter-spacing: 0.04em;
+  color: var(--gray); max-width: 400px; margin-bottom: 2.8rem;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.9s ease 0.7s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1.4rem; align-items: center;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.9s ease 0.9s forwards;
+}
+.btn-primary {
+  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+  background: var(--gold); color: var(--black);
+  padding: 1rem 2.5rem; text-decoration: none; font-weight: 500;
+  transition: background var(--transition), transform var(--transition);
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+.btn-ghost {
+  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--off); text-decoration: none;
+  display: flex; align-items: center; gap: 0.7rem;
+  transition: color var(--transition);
+}
+.btn-ghost::after { content: '→'; transition: transform var(--transition); }
+.btn-ghost:hover { color: var(--gold); }
+.btn-ghost:hover::after { transform: translateX(5px); }
+
+.hero-visual {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; animation: fadeIn 1.2s ease 0.6s forwards;
+}
+.hero-img-wrap {
+  position: relative;
+  width: 100%; max-width: 560px;
+}
+/* Área da imagem principal do hero */
+.hero-img-area {
+  width: 100%;
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.12);
+}
+.hero-img-area img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+  filter: saturate(0.85) brightness(0.9);
+  transition: transform 8s ease;
+}
+.hero-img-area:hover img { transform: scale(1.04); }
+/* Overlay dourado sutil */
+.hero-img-area::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(201,168,76,0.06) 0%,
+    transparent 50%,
+    rgba(8,8,8,0.5) 100%
+  );
+  pointer-events: none;
+}
+/* Placeholder quando não há imagem */
+.hero-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  background: var(--dark2);
+  border: 1px dashed rgba(201,168,76,0.2);
+  color: var(--gray);
+  padding: 2rem; text-align: center;
+}
+.hero-img-placeholder svg { opacity: 0.3; }
+.hero-img-placeholder span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.hero-badge {
+  position: absolute; bottom: 8%; right: -5%;
+  background: rgba(8,8,8,0.9); border: 1px solid rgba(201,168,76,0.3);
+  padding: 1rem 1.4rem;
+  backdrop-filter: blur(12px);
+  animation: float 6s ease-in-out infinite 1s;
+}
+.hero-badge-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+  font-weight: 300; color: var(--gold);
+}
+.hero-badge-txt { font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gray); text-transform: uppercase; }
+.hero-stats {
+  position: absolute; bottom: -5%; left: -4%;
+  display: flex; gap: 0; background: rgba(8,8,8,0.85);
+  border: 1px solid rgba(201,168,76,0.12);
+  backdrop-filter: blur(12px);
+}
+.hero-stat {
+  text-align: center; padding: 0.8rem 1.2rem;
+  border-right: 1px solid rgba(201,168,76,0.1);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+  font-weight: 300; color: var(--off); display: block;
+}
+.hero-stat-label { font-size: 0.55rem; letter-spacing: 0.15em; color: var(--gray); text-transform: uppercase; }
+
+/* ── MARQUEE ── */
+.marquee-bar {
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  overflow: hidden; padding: 1rem 0;
+  background: var(--dark2);
+}
+.marquee-track {
+  display: flex; gap: 4rem;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gray); display: flex; align-items: center; gap: 1rem; flex-shrink: 0;
+}
+.marquee-item::after { content: '◆'; color: var(--gold); font-size: 0.4rem; }
+
+/* ── MODELS ── */
+#models { padding: 7rem 4rem; background: var(--dark); }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-tag {
+  font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem; display: block;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300;
+  line-height: 1.1;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+
+.models-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+  max-width: 1200px; margin: 0 auto;
+}
+.model-card {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition);
+  cursor: pointer;
+}
+.model-card:hover { transform: translateY(-6px); }
+.model-card.featured {
+  grid-row: span 2;
+  border-color: rgba(201,168,76,0.2);
+}
+.model-img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  display: block;
+  filter: saturate(0.7) brightness(0.85);
+  transition: filter var(--transition), transform var(--transition);
+}
+.model-card.featured .model-img { aspect-ratio: 2/3; }
+.model-card:hover .model-img { filter: saturate(0.9) brightness(1); transform: scale(1.04); }
+.model-img-wrap { overflow: hidden; position: relative; }
+.model-img-wrap::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,0.85) 0%, transparent 50%);
+}
+.model-info { padding: 1.6rem 1.8rem 1.8rem; }
+.model-badge {
+  font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem; display: block;
+}
+.model-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem;
+}
+.model-card.featured .model-name { font-size: 2rem; }
+.model-desc { font-size: 0.72rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.2rem; }
+.model-specs {
+  display: flex; gap: 1.5rem; margin-bottom: 1.4rem;
+}
+
+.model-spec-val {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: var(--off);
+}
+.model-spec-label { font-size: 0.55rem; letter-spacing: 0.15em; color: var(--gray); text-transform: uppercase; }
+.model-footer { display: flex; align-items: center; justify-content: space-between; }
+.model-price {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--gold);
+}
+.model-cta {
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--off); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px;
+  transition: color var(--transition), border-color var(--transition);
+}
+.model-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── FEATURES ── */
+#features {
+  padding: 7rem 4rem;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+#features::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.1), transparent);
+}
+.features-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
+.features-visual { position: relative; }
+.features-circle {
+  width: 420px; height: 420px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.12);
+  position: relative; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+}
+.features-circle::before {
+  content: ''; position: absolute; inset: 20px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.07);
+}
+.features-circle::after {
+  content: ''; position: absolute; inset: 40px; border-radius: 50%;
+  border: 1px dashed rgba(201,168,76,0.05);
+  animation: spin 30s linear infinite;
+}
+.features-icon-center {
+  font-size: 5rem; z-index: 2; position: relative;
+  animation: float 5s ease-in-out infinite;
+}
+.feature-dot {
+  position: absolute; width: 60px; height: 60px; border-radius: 50%;
+  background: var(--dark3); border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+.feature-dot:nth-child(2) { top: 5%; left: 50%; transform: translateX(-50%); }
+.feature-dot:nth-child(3) { bottom: 5%; left: 50%; transform: translateX(-50%); }
+.feature-dot:nth-child(4) { left: 5%; top: 50%; transform: translateY(-50%); }
+.feature-dot:nth-child(5) { right: 5%; top: 50%; transform: translateY(-50%); }
+
+.features-list { display: flex; flex-direction: column; gap: 2.5rem; }
+.feature-item { display: flex; gap: 1.5rem; align-items: flex-start; }
+.feature-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300;
+  color: rgba(201,168,76,0.25); line-height: 1; flex-shrink: 0; width: 2.5rem;
+}
+
+.feature-name {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 0.5rem; color: var(--off);
+}
+.feature-text { font-size: 0.75rem; color: var(--gray); line-height: 1.8; }
+
+/* ── TESTIMONIALS CAROUSEL ── */
+#testimonials { padding: 7rem 4rem; background: var(--dark2); overflow: hidden; }
+.testi-carousel-wrap { max-width: 1100px; margin: 3rem auto 0; position: relative; }
+
+/* track deslizante */
+.testi-track-outer { overflow: hidden; }
+.testi-track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.testi-card {
+  background: var(--dark3); padding: 2.8rem;
+  border: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  flex: 0 0 calc(33.333% - 1px);
+  min-width: calc(33.333% - 1px);
+  margin-right: 1.5px;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .testi-card { flex: 0 0 calc(50% - 1px); min-width: calc(50% - 1px); }
+}
+@media (max-width: 580px) {
+  .testi-card { flex: 0 0 100%; min-width: 100%; margin-right: 0; }
+}
+.testi-card::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif; font-size: 8rem;
+  color: rgba(201,168,76,0.07); position: absolute; top: -0.5rem; left: 1.5rem;
+  line-height: 1; pointer-events: none;
+}
+.testi-stars { color: var(--gold); font-size: 0.72rem; margin-bottom: 1.4rem; letter-spacing: 0.1em; }
+.testi-text { font-size: 0.82rem; line-height: 1.9; color: #AAA; margin-bottom: 2rem; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 0.9rem; }
+.testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #5C3D1E);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--black);
+  flex-shrink: 0;
+}
+.testi-name { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.05em; }
+.testi-role { font-size: 0.6rem; color: var(--gray); margin-top: 0.2rem; }
+
+/* Controles */
+.testi-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 2.5rem;
+}
+.testi-dots { display: flex; gap: 0.6rem; align-items: center; }
+.testi-dot {
+  width: 24px; height: 2px; background: rgba(201,168,76,0.2);
+  cursor: pointer; transition: all 0.4s ease;
+  border: none;
+}
+.testi-dot.active { width: 48px; background: var(--gold); }
+.testi-arrows { display: flex; gap: 0.8rem; }
+.testi-arrow {
+  width: 46px; height: 46px;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: transparent; cursor: pointer; color: var(--gray);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+.testi-arrow:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.05); }
+
+/* ── NEWSLETTER ── */
+#newsletter {
+  padding: 6rem 4rem;
+  background: var(--dark);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+#newsletter::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+}
+.newsletter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300;
+  margin-bottom: 1rem; position: relative;
+}
+.newsletter-sub { font-size: 0.75rem; color: var(--gray); margin-bottom: 2.5rem; letter-spacing: 0.05em; }
+.newsletter-form {
+  display: flex; max-width: 480px; margin: 0 auto;
+  border: 1px solid rgba(201,168,76,0.3); position: relative;
+}
+.newsletter-form input {
+  flex: 1; background: transparent;
+  border: none; outline: none;
+  padding: 1rem 1.4rem; font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; color: var(--off); letter-spacing: 0.05em;
+}
+.newsletter-form input::placeholder { color: var(--gray); }
+.newsletter-form button {
+  background: var(--gold); border: none;
+  padding: 1rem 1.8rem; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+  color: var(--black); transition: background var(--transition);
+}
+.newsletter-form button:hover { background: var(--gold-lt); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding: 4rem 4rem 2rem;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300;
+  letter-spacing: 0.3em; margin-bottom: 1rem;
+}
+.footer-brand-name span { color: var(--gold); }
+.footer-brand-desc { font-size: 0.72rem; color: var(--gray); line-height: 1.8; max-width: 260px; }
+.footer-col-title {
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.4rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-links a {
+  font-size: 0.72rem; color: var(--gray); text-decoration: none;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--off); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 0.62rem; color: rgba(136,136,136,0.5); letter-spacing: 0.1em; }
+.footer-socials { display: flex; gap: 1.2rem; }
+.footer-social {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray); font-size: 0.7rem; text-decoration: none;
+  transition: border-color var(--transition), color var(--transition);
+}
+.footer-social:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── WHATSAPP FLOAT ── */
+.whatsapp-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.3);
+  text-decoration: none;
+  animation: float 4s ease-in-out infinite;
+  transition: transform var(--transition);
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+.whatsapp-float svg { width: 26px; height: 26px; fill: white; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideR {
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav { padding: 1.4rem 2.5rem; }
+  nav.scrolled { padding: 0.9rem 2.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  #hero { grid-template-columns: 1fr; padding: 7rem 2.5rem 4rem; text-align: center; }
+  .hero-content { margin-bottom: 3rem; }
+  .hero-desc { margin: 0 auto 2.5rem; }
+  .hero-actions { justify-content: center; }
+  .hero-badge { right: 5%; }
+  .hero-stats { left: 0; bottom: -14%; }
+  .hero-img-area { aspect-ratio: 16/9; }
+  .models-grid { grid-template-columns: 1fr 1fr; }
+  .model-card.featured { grid-row: span 1; }
+  .model-card.featured .model-img { aspect-ratio: 4/3; }
+  .features-layout { grid-template-columns: 1fr; gap: 4rem; }
+  .features-circle { width: 300px; height: 300px; }
+  .features-icon-center { font-size: 3.5rem; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  #features, #models, #testimonials, #newsletter { padding: 5rem 2.5rem; }
+  footer { padding: 3rem 2.5rem 2rem; }
+}
+
+@media (max-width: 640px) {
+  #hero { padding: 6rem 1.5rem 3rem; }
+  .hero-stats { gap: 1rem; }
+  .models-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .newsletter-form { flex-direction: column; border: none; gap: 1rem; }
+  .newsletter-form input { border: 1px solid rgba(201,168,76,0.3); padding: 0.9rem 1.2rem; }
+  .newsletter-form button { padding: 0.9rem; }
+  #features, #models, #testimonials, #newsletter { padding: 4rem 1.5rem; }
+  footer { padding: 3rem 1.5rem 1.5rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+.home {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  /* Compensa o header fixed mobile */
+  margin-top: 0;
+}
+@media (min-width: 1100px) {
+  .hero-bg {
+    display: flex;
+    align-self: auto;
+  }
+}
+/* Empurra o conteúdo para não ficar atrás do header fixed */
+@media (max-width: 767px) {
+  body {
+    padding-top: 110px;
+  }
+  body.header-collapsed {
+    padding-top: 60px;
+  }
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slidee {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+
+.slidee.activee {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slidee img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+}
+
+.content {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  padding: 0 24px;
+  width: 100%;
+  z-index: 2;
+}
+
+.content h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 28px;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  letter-spacing: 1px;
+}
+
+.content p {
+  font-size: 14px;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.9s ease 0.4s, transform 0.9s ease 0.4s;
+  color: rgba(255,255,255,0.9);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Badge animado acima do titulo */
+.content .hero-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--verde);
+  border: 1px solid rgba(46,204,113,0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+  background: rgba(46,204,113,0.08);
+}
+
+.slidee.activee .content h1 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slidee.activee .content p {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slidee.activee .content .hero-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dotss {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.dott {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.dott.activee {
+  opacity: 1;
+  background: #fff;
+  transform: scale(1.3);
+}
+
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+
+<nav id="navbar">
+  <!--
+    LOGO: Para usar imagem, descomente a linha abaixo e comente a linha de texto.
+    Substitua "logo.png" pelo caminho da sua imagem (PNG ou SVG com fundo transparente).
+  -->
+  <!-- <a href="#" class="nav-logo"><img src="logo.png" alt="VOLTZ" /></a> -->
+  <a href="#" class="nav-logo">V<span>O</span>LTZ</a>
+  <ul class="nav-links">
+    <li><a href="#models">Modelos</a></li>
+    <li><a href="#features">Tecnologia</a></li>
+    <li><a href="#testimonials">Depoimentos</a></li>
+    <li><a href="#newsletter">Contato</a></li>
+  </ul>
+  <a href="#models" class="nav-cta">Ver Coleção</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#models" onclick="closeMenu()">Modelos</a>
+  <a href="#features" onclick="closeMenu()">Tecnologia</a>
+  <a href="#testimonials" onclick="closeMenu()">Depoimentos</a>
+  <a href="#newsletter" onclick="closeMenu()">Contato</a>
+</div>
+
+<!-- HERO -->
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <span class="hero-tag">Coleção 2025 — Exclusiva</span>
+    <h1 class="hero-title">
+      Mova-se com<br><em>elegância</em><br>elétrica
+    </h1>
+    <p class="hero-desc">
+      Bikes elétricas de alto desempenho concebidas para quem recusa o ordinário. Design europeu, engenharia de ponta e autonomia superior para cada jornada.
+    </p>
+    <div class="hero-actions">
+      <a href="#models" class="btn-primary">Explorar Modelos</a>
+      <a href="#features" class="btn-ghost">Conheça a tecnologia</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <div class="hero-img-area">
+        <div class="carousel">
+
+
+  <div class="slidee activee">
+    <img src="img1.jpg" alt="reparo">
+    <div class="overlay"></div>
+    <div class="content">
+      
+      <h1>Procedência</h1>
+      <p>Compra segura do início ao fim.</p>
+    </div>
+  </div>
+
+  <div class="slidee">
+    <img src="img2.jpg" alt="diagnostico">
+    <div class="overlay"></div>
+    <div class="content">
+     
+      <h1>Qualidade</h1>
+      <p>Ótimo custo-benefício.</p>
+    </div>
+  </div>
+
+  <div class="slidee">
+    <img src="img3.jpg" alt="Revisao">
+    <div class="overlay"></div>
+    <div class="content">
+      
+      <h1>Facilidade</h1>
+      <p>Agilizamos pra você já sair pilotando.</p>
+    </div>
+  </div>
+
+  <div class="dotss">
+    <span class="dott activ" data-index="0"></span>
+    <span class="dott" data-index="1"></span>
+    <span class="dott" data-index="2"></span>
+  </div>
+
+</div>
+      </div>
+
+
+
+  </div>
+</section>
+
+<!-- MARQUEE -->
+
+<div class="marquee-bar">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Design Premium</span>
+    <span class="marquee-item">Motor Brushless 750W</span>
+    <span class="marquee-item">Bateria Samsung 48V</span>
+    <span class="marquee-item">Freios Hidráulicos</span>
+    <span class="marquee-item">Suspensão Total</span>
+    <span class="marquee-item">Conectividade App</span>
+    <span class="marquee-item">Garantia 2 Anos</span>
+    <span class="marquee-item">Entrega Nacional</span>
+    <span class="marquee-item">Design Premium</span>
+    <span class="marquee-item">Motor Brushless 750W</span>
+    <span class="marquee-item">Bateria Samsung 48V</span>
+    <span class="marquee-item">Freios Hidráulicos</span>
+    <span class="marquee-item">Suspensão Total</span>
+    <span class="marquee-item">Conectividade App</span>
+    <span class="marquee-item">Garantia 2 Anos</span>
+    <span class="marquee-item">Entrega Nacional</span>
+  </div>
+</div>
+
+<!-- MODELS -->
+
+<section id="models">
+  <div class="section-header reveal">
+    <span class="section-tag">Nossa Coleção</span>
+    <h2 class="section-title">Escolha seu<br><em>modelo ideal</em></h2>
+  </div>
+
+  <div class="models-grid">
+    <!-- Featured -->
+    <div class="model-card featured reveal">
+      <div class="model-img-wrap">
+        <img class="model-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="VOLTZ Apex" loading="lazy" />
+      </div>
+      <div class="model-info">
+        <span class="model-badge">★ Mais Vendida</span>
+        <h3 class="model-name">VOLTZ Apex</h3>
+        <p class="model-desc">A experiência definitiva em mobilidade urbana. Motor de 750W, autonomia de 120km e design que impõe respeito.</p>
+        <div class="model-specs">
+          <div class="model-spec-item">
+            <div class="model-spec-val">120km</div>
+            <div class="model-spec-label">Autonomia</div>
+          </div>
+          <div class="model-spec-item">
+            <div class="model-spec-val">750W</div>
+            <div class="model-spec-label">Motor</div>
+          </div>
+          <div class="model-spec-item">
+            <div class="model-spec-val">45km/h</div>
+            <div class="model-spec-label">Velocidade</div>
+          </div>
+        </div>
+        <div class="model-footer">
+          <div class="model-price">R$ 12.900</div>
+          <a href="#newsletter" class="model-cta">Saiba mais →</a>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Card 2 -->
+<div class="model-card reveal">
+  <div class="model-img-wrap">
+    <img class="model-img" src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=500&q=80" alt="VOLTZ Urban" loading="lazy" />
+  </div>
+  <div class="model-info">
+    <span class="model-badge">Urban Series</span>
+    <h3 class="model-name">VOLTZ Urban</h3>
+    <p class="model-desc">Compacta, ágil e conectada. Perfeita para o dia a dia da cidade.</p>
+    <div class="model-footer">
+      <div class="model-price">R$ 7.490</div>
+      <a href="#newsletter" class="model-cta">Saiba mais →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="model-card reveal">
+  <div class="model-img-wrap">
+    <img class="model-img" src="https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=500&q=80" alt="VOLTZ Trail" loading="lazy" />
+  </div>
+  <div class="model-info">
+    <span class="model-badge">Off-Road</span>
+    <h3 class="model-name">VOLTZ Trail</h3>
+    <p class="model-desc">Domina trilhas e terrenos acidentados com suspensão total e pneus all-terrain.</p>
+    <div class="model-footer">
+      <div class="model-price">R$ 15.200</div>
+      <a href="#newsletter" class="model-cta">Saiba mais →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="model-card reveal">
+  <div class="model-img-wrap">
+    <img class="model-img" src="https://images.unsplash.com/photo-1504025468847-0e438279542c?w=500&q=80" alt="VOLTZ Cargo" loading="lazy" />
+  </div>
+  <div class="model-info">
+    <span class="model-badge">Cargo Series</span>
+    <h3 class="model-name">VOLTZ Cargo</h3>
+    <p class="model-desc">Para quem precisa carregar mais: bagageiro reforçado e motor de alto torque.</p>
+    <div class="model-footer">
+      <div class="model-price">R$ 9.800</div>
+      <a href="#newsletter" class="model-cta">Saiba mais →</a>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+
+<section id="features">
+  <div class="features-layout">
+    <div class="features-visual reveal">
+      <div class="features-circle">
+        <div class="features-icon-center">⚡</div>
+        <div class="feature-dot">🔋</div>
+        <div class="feature-dot">🛞</div>
+        <div class="feature-dot">📡</div>
+        <div class="feature-dot">🔧</div>
+      </div>
+    </div>
+    <div class="features-list">
+      <div class="section-header" style="text-align:left; margin-bottom:2.5rem">
+        <span class="section-tag">Engenharia</span>
+        <h2 class="section-title reveal">Tecnologia que<br><em>transforma</em></h2>
+      </div>
+      <div class="feature-item reveal">
+        <span class="feature-num">01</span>
+        <div class="feature-body">
+          <div class="feature-name">Motor Brushless de Alta Eficiência</div>
+          <p class="feature-text">Motores sem escovas com torque de até 95 Nm. Silenciosos, duráveis e com regeneração de energia durante a frenagem.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <span class="feature-num">02</span>
+        <div class="feature-body">
+          <div class="feature-name">Bateria de Células Samsung 21700</div>
+          <p class="feature-text">Pack de 48V/20Ah com BMS inteligente, proteção térmica e ciclo de vida superior a 1.000 recargas completas.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <span class="feature-num">03</span>
+        <div class="feature-body">
+          <div class="feature-name">Conectividade e App Exclusivo</div>
+          <p class="feature-text">Monitore velocidade, autonomia, histórico de rotas e trave sua bike remotamente pelo aplicativo VOLTZ para iOS e Android.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <span class="feature-num">04</span>
+        <div class="feature-body">
+          <div class="feature-name">Freios Hidráulicos Magura MT5</div>
+          <p class="feature-text">Sistema de frenagem profissional com potência e modulação superiores, garantindo segurança em qualquer velocidade.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section id="testimonials">
+  <div class="section-header reveal">
+    <span class="section-tag">Depoimentos</span>
+    <h2 class="section-title">O que dizem nossos<br><em>clientes</em></h2>
+  </div>
+  <div class="testi-carousel-wrap reveal">
+    <div class="testi-track-outer">
+      <div class="testi-track" id="testiTrack">
+
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Comprei a VOLTZ Apex há 6 meses e simplesmente não consigo mais imaginar minha rotina sem ela. Qualidade impressionante, acabamento impecável.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rafael Mendonça</div>
+          <div class="testi-role">São Paulo, SP</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Atendimento excepcional, entrega antes do prazo. A Trail superou todas as minhas expectativas nas trilhas do Parque Estadual.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">C</div>
+        <div>
+          <div class="testi-name">Carla Figueiredo</div>
+          <div class="testi-role">Curitiba, PR</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Investimento que se paga em meses de gasolina economizada. A autonomia de 120km é real — fiz o teste eu mesmo.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">M</div>
+        <div>
+          <div class="testi-name">Marcos Duarte</div>
+          <div class="testi-role">Rio de Janeiro, RJ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Design que chama atenção onde chego. Já recebi perguntas de diversas pessoas curiosas. Além de bonita, é incrivelmente silenciosa e potente.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Ana Beatriz Costa</div>
+          <div class="testi-role">Belo Horizonte, MG</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">A VOLTZ Urban é perfeita para o meu dia a dia. Leve, compacta e a recarga é tão rápida que nunca fico sem bateria. Recomendo demais.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">G</div>
+        <div>
+          <div class="testi-name">Gabriel Rocha</div>
+          <div class="testi-role">Porto Alegre, RS</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="testi-controls">
+  <div class="testi-dots" id="testiDots"></div>
+  <div class="testi-arrows">
+    <button class="testi-arrow" id="testiPrev" aria-label="Anterior">&#8592;</button>
+    <button class="testi-arrow" id="testiNext" aria-label="Próximo">&#8594;</button>
+  </div>
+</div>
+
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+
+<section id="newsletter">
+  <span class="section-tag reveal">Fique por dentro</span>
+  <h2 class="newsletter-title reveal">Receba lançamentos<br>em <em style="font-style:italic;color:var(--gold)">primeira mão</em></h2>
+  <p class="newsletter-sub reveal">Novidades, ofertas exclusivas e conteúdo para o ciclista premium.</p>
+  <div class="newsletter-form reveal">
+    <input type="email" placeholder="Seu melhor e-mail" />
+    <button type="button">Inscrever</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">V<span>O</span>LTZ</div>
+      <p class="footer-brand-desc">Bikes elétricas premium para quem valoriza desempenho, design e sustentabilidade. Cada pedalada, uma declaração.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Produtos</div>
+      <ul class="footer-links">
+        <li><a href="#">VOLTZ Apex</a></li>
+        <li><a href="#">VOLTZ Urban</a></li>
+        <li><a href="#">VOLTZ Trail</a></li>
+        <li><a href="#">VOLTZ Cargo</a></li>
+        <li><a href="#">Acessórios</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Empresa</div>
+      <ul class="footer-links">
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Tecnologia</a></li>
+        <li><a href="#">Sustentabilidade</a></li>
+        <li><a href="#">Imprensa</a></li>
+        <li><a href="#">Carreiras</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Suporte</div>
+      <ul class="footer-links">
+        <li><a href="#">Central de Ajuda</a></li>
+        <li><a href="#">Garantia</a></li>
+        <li><a href="#">Manutenção</a></li>
+        <li><a href="#">Revendedores</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 VOLTZ Bikes Elétricas. Todos os direitos reservados.</span>
+    <div class="footer-socials">
+      <a href="#" class="footer-social">in</a>
+      <a href="#" class="footer-social">ig</a>
+      <a href="#" class="footer-social">yt</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+
+<a href="https://wa.me/5521999999999" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

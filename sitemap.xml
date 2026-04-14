@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.5">
+  <url>
+    <loc>https://nexvg.com.br/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nexvg.com.br/assistencia-celular/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexvg.com.br/agencia-de-carro/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexvg.com.br/bike-eletrica/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexvg.com.br/oficina-automotiva/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nexvg.com.br/refri-ele/</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>

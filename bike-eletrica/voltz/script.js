@@ -40,6 +40,161 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 
+  // ── HERO CARROSSEL ──
+  (function() {
+    var track   = document.getElementById('hcTrack');
+    var fill    = document.getElementById('hcFill');
+    var dotsWrap= document.getElementById('hcDots');
+    var btnPrev = document.getElementById('hcPrev');
+    var btnNext = document.getElementById('hcNext');
+    if (!track) return;
+
+    var slides  = track.querySelectorAll('.hc-slide');
+    var total   = slides.length;
+    var current = 0;
+    var INTERVAL= 5000; // ms por slide
+    var timer, fillTimer;
+
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      slides.forEach(function(_, i) {
+        var d = document.createElement('button');
+        d.className = 'hc-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.addEventListener('click', function() { goTo(i); resetAuto(); });
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      dotsWrap.querySelectorAll('.hc-dot')[current].classList.remove('active');
+      current = (idx + total) % total;
+      slides[current].classList.add('active');
+      dotsWrap.querySelectorAll('.hc-dot')[current].classList.add('active');
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      startFill();
+    }
+
+    function startFill() {
+      clearInterval(fillTimer);
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          fill.style.transition = 'width ' + INTERVAL + 'ms linear';
+          fill.style.width = '100%';
+        });
+      });
+    }
+
+    function resetAuto() {
+      clearInterval(timer);
+      timer = setInterval(function() { goTo(current + 1); }, INTERVAL);
+    }
+
+    btnNext.addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+    btnPrev.addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+
+    // swipe
+    var tx = 0;
+    track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function(e) {
+      var diff = tx - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
+    });
+
+    buildDots();
+    startFill();
+    resetAuto();
+  })();
+
+  // ── MODAL DE BIKE ──
+  (function() {
+    var overlay  = document.getElementById('bikeModalOverlay');
+    var closeBtn = document.getElementById('bikeModalClose');
+    var mainImg  = document.getElementById('modalMainImg');
+    var thumbsEl = document.getElementById('modalThumbs');
+    var countEl  = document.getElementById('modalImgCount');
+    var gallery  = [];
+    var current  = 0;
+
+    function setMainImg(idx) {
+      current = idx;
+      mainImg.classList.add('switching');
+      setTimeout(function() {
+        mainImg.src = gallery[idx];
+        mainImg.classList.remove('switching');
+      }, 180);
+      countEl.textContent = (idx + 1) + ' / ' + gallery.length;
+      thumbsEl.querySelectorAll('.bike-modal-thumb').forEach(function(t, i) {
+        t.classList.toggle('active', i === idx);
+      });
+    }
+
+    function buildGallery(imgs) {
+      gallery = imgs;
+      thumbsEl.innerHTML = '';
+      imgs.forEach(function(url, i) {
+        var t = document.createElement('div');
+        t.className = 'bike-modal-thumb' + (i === 0 ? ' active' : '');
+        t.innerHTML = '<img src="' + url + '" alt="Foto ' + (i+1) + '" loading="lazy" />';
+        t.addEventListener('click', function() { setMainImg(i); });
+        thumbsEl.appendChild(t);
+      });
+      // esconde thumbs se só tiver 1 foto
+      thumbsEl.style.display = imgs.length > 1 ? 'flex' : 'none';
+      countEl.style.display  = imgs.length > 1 ? '' : 'none';
+    }
+
+    function openBikeModal(btn) {
+      var specs = JSON.parse(btn.dataset.specs    || '[]');
+      var feats = JSON.parse(btn.dataset.features || '[]');
+      var imgs  = JSON.parse(btn.dataset.gallery  || '[]');
+      // fallback: usa data-img se não tiver gallery
+      if (!imgs.length && btn.dataset.img) imgs = [btn.dataset.img];
+
+      document.getElementById('modalBadge').textContent = btn.dataset.badge || '';
+      document.getElementById('modalTitle').textContent = btn.dataset.name  || '';
+      document.getElementById('modalDesc').textContent  = btn.dataset.desc  || '';
+      document.getElementById('modalPrice').textContent = btn.dataset.price || '';
+
+      document.getElementById('modalSpecs').innerHTML = specs.map(function(s) {
+        return '<div class="bike-modal-spec"><div class="bike-modal-spec-label">' + s[0] + '</div><div class="bike-modal-spec-val">' + s[1] + '</div></div>';
+      }).join('');
+
+      document.getElementById('modalFeatures').innerHTML = feats.map(function(f) {
+        return '<div class="bike-modal-feat-item">' + f + '</div>';
+      }).join('');
+
+      buildGallery(imgs);
+      mainImg.src = imgs[0] || '';
+      current = 0;
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    window.closeBikeModal = function() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    closeBtn.addEventListener('click', closeBikeModal);
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeBikeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeBikeModal();
+      if (e.key === 'ArrowRight' && overlay.classList.contains('open')) setMainImg((current + 1) % gallery.length);
+      if (e.key === 'ArrowLeft'  && overlay.classList.contains('open')) setMainImg((current - 1 + gallery.length) % gallery.length);
+    });
+
+    document.querySelectorAll('.open-modal').forEach(function(btn) {
+      btn.addEventListener('click', function() { openBikeModal(this); });
+    });
+  })();
+
   // ── TESTIMONIALS CAROUSEL ──
   (function() {
     var track = document.getElementById('testiTrack');
@@ -124,60 +279,18 @@
     }
   });
 
-  // CARROSSEL HERO
-var slidess = document.querySelectorAll(`.slidee`);
-var dotss = document.querySelectorAll(`.dott`);
-var heroCurrent = 0;
-var heroInterval = setInterval(heroNext, 5500);
+ // WhatsApp: sobe quando chega no footer
+// WhatsApp: sobe quando chega no footer
+var waFloat = document.querySelector('.whatsapp-float');
+var footer = document.querySelector('footer');
 
-function showHeroSlide(index) {
-slidess.forEach(function(s) { s.classList.remove(`activee`); });
-dotss.forEach(function(d) { d.classList.remove(`activee`); });
-slidess[index].classList.add(`activee`);
-dotss[index].classList.add(`activee`);
-heroCurrent = index;
-}
-
-function heroNext() {
-heroCurrent = (heroCurrent + 1) % slidess.length;
-showHeroSlide(heroCurrent);
-}
-
-function heroPrev() {
-heroCurrent = (heroCurrent - 1 + slidess.length) % slidess.length;
-showHeroSlide(heroCurrent);
-}
-
-dotss.forEach(function(dot) {
-dot.addEventListener(`click`, function(e) {
-var idx = parseInt(e.target.getAttribute(`data-index`));
-showHeroSlide(idx);
-clearInterval(heroInterval);
-heroInterval = setInterval(heroNext, 5500);
+window.addEventListener('scroll', function() {
+  var footerTop = footer.getBoundingClientRect().top;
+  var windowH = window.innerHeight;
+  if (footerTop < windowH) {
+    var overlap = windowH - footerTop;
+    waFloat.style.bottom = (32 + overlap) + 'px';
+  } else {
+    waFloat.style.bottom = '32px';
+  }
 });
-});
-
-slidess.forEach(function(slide) {
-slide.addEventListener(`click`, function(e) {
-var half = slide.clientWidth / 2;
-if (e.offsetX < half) { heroPrev(); } else { heroNext(); }
-clearInterval(heroInterval);
-heroInterval = setInterval(heroNext, 5500);
-});
-});
-
-var heroTouchStart = 0;
-var heroEl = document.querySelector(`.carousel`);
-if (heroEl) {
-heroEl.addEventListener(`touchstart`, function(e) {
-heroTouchStart = e.touches[0].clientX;
-}, { passive: true });
-heroEl.addEventListener(`touchend`, function(e) {
-var diff = heroTouchStart - e.changedTouches[0].clientX;
-if (Math.abs(diff) > 50) {
-if (diff > 0) { heroNext(); } else { heroPrev(); }
-clearInterval(heroInterval);
-heroInterval = setInterval(heroNext, 5500);
-}
-}, { passive: true });
-}

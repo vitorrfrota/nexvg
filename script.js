@@ -136,3 +136,33 @@ setTimeout(() => {
         if (!isOpen) item.classList.add('open');
       });
     });
+
+    // ── Busca de segmentos
+const segSearch = document.getElementById('segSearch');
+const segClear  = document.getElementById('segClear');
+const segEmpty  = document.getElementById('segEmpty');
+const segCards  = document.querySelectorAll('.seg-card');
+
+segSearch.addEventListener('input', () => {
+  const q = segSearch.value.toLowerCase().trim();
+  segClear.style.display = q ? 'block' : 'none';
+  let found = 0;
+  segCards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    if (text.includes(q) || q === '') {
+      card.classList.remove('hidden');
+      found++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  segEmpty.style.display = found === 0 ? 'block' : 'none';
+});
+
+segClear.addEventListener('click', () => {
+  segSearch.value = '';
+  segClear.style.display = 'none';
+  segEmpty.style.display = 'none';
+  segCards.forEach(c => c.classList.remove('hidden'));
+  segSearch.focus();
+});

@@ -5,9 +5,61 @@ body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif
 
 /* HEADER */
 header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(10,10,10,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.logo-img{height:72px;width:auto;object-fit:contain;display:block;}
-.logo-placeholder{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;letter-spacing:2px;color:var(--gold);}
-.logo-placeholder span{color:var(--white);font-weight:300;}
+.logo{
+ 
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  text-decoration:none;
+
+}
+
+/* EFEITO DE GLOW */
+
+.logo::before{
+
+  content:'';
+
+  position:absolute;
+
+  width:70px;
+
+  height:70px;
+
+  background:radial-gradient(circle,
+
+  rgba(0,183,255,0.35) 0%,
+
+  transparent 70%);
+
+  filter:blur(18px);
+
+  z-index:-1;
+
+  animation:logoGlow 4s ease-in-out infinite;
+
+}
+
+/* IMAGEM DA LOGO */
+
+.logo img{
+margin-top: 10px;
+  width:152px;
+ border-radius: 12px;
+  animation:floatingLogo 4s ease-in-out infinite;
+
+  filter:
+
+  drop-shadow(0 0 10px rgba(0,183,255,0.55))
+
+  drop-shadow(0 0 25px rgba(0,183,255,0.25));
+
+  transition:0.4s ease; }
 nav{display:flex;gap:36px;align-items:center;}
 nav a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;transition:color .2s;}
 nav a:hover{color:var(--white);}
@@ -27,14 +79,36 @@ nav a:hover{color:var(--white);}
 
 .home {
   width: 100%;
-  height: 250px;
+  height: 350px;
   position: relative;
   overflow: hidden;
   padding: 0;
   /* Compensa o header fixed mobile */
   margin-top: 0;
 }
+@media (min-width: 768px){
+.slidee {
+  height: 250px;
+  width: 600px;
+  margin-top: 100px;
+  margin-left: 300px;
+  
+  
+}
 
+.dotss {
+  margin-bottom: -100px;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+
+}
 /* Empurra o conteúdo para não ficar atrás do header fixed */
 @media (max-width: 767px) {
   body {
@@ -46,8 +120,8 @@ nav a:hover{color:var(--white);}
 }
 
 .carousel {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 250px;
   position: relative;
 }
 

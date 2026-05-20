@@ -1,130 +1,168 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NEXVG — Estrutura Digital para Empresas</title>
+  <meta name="description" content="Transformamos pequenas e médias empresas em referências digitais. Estrutura, estratégia e resultado." />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="favicon.png" />
   <meta name="theme-color" content="#04080f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css">
-  
-   
-
-  
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- ══ HEADER ══ -->
-
   <header id="header">
-    <a class="logo" href="#inicio">
-      
-      <img class="logo-img" src="images/logo.jpg" alt="NEXVG"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <div class="logo-img-placeholder" style="display:none;">Logo</div>
-      
-    </a>
-    <nav>
-      <a href="#processo">Processo</a>
-      <a href="#segmentos">Segmentos</a>
-      <a href="#problema">O Problema</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contato" class="nav-cta">Falar com Especialista</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="#inicio" class="logo" aria-label="NEXVG">
+        <img src="images/logo.jpg" alt="NEXVG"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        
+        </span>
+        <span class="logo-sub">Estrutura Digital</span>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav-desktop" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Processos</a>
+        <a href="#faq">Dúvidas</a>
+        
+      </nav>
+
+      <!-- CTA desktop -->
+      <div class="header-actions">
+        <a href="https://wa.me/5521975957899?text=Olá!%20Gostaria%20de%20um%20diagnóstico%20gratuito." target="_blank" class="btn-nav-cta">
+          Diagnóstico Gratuito
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
   </header>
 
   <!-- ══ MOBILE NAV ══ -->
-
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#processo" class="mob-link">Processo</a>
-    <a href="#segmentos"class="mob-link">Segmentos</a>
-    <a href="#problema" class="mob-link">O Problema</a>
-    <a href="#servicos" class="mob-link">Serviços</a>
-    <a href="#faq" class="mob-link">FAQ</a>
-    <a href="#contato" class="mob-link m-cta">Falar com Especialista</a>
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav-inner">
+      <nav class="mobile-links">
+        <a href="#inicio" class="mob-link">
+          <span class="mob-num">01</span>
+          <span>Início</span>
+        </a>
+        <a href="#segmentos" class="mob-link">
+          <span class="mob-num">02</span>
+          <span>Segmentos</span>
+        </a>
+        <a href="#processos" class="mob-link">
+          <span class="mob-num">03</span>
+          <span>Processos</span>
+        </a>
+        <a href="#problema" class="mob-link">
+          <span class="mob-num">04</span>
+          <span>Sua empresa frágil no digital</span>
+        </a>
+        <a href="#servicos" class="mob-link">
+          <span class="mob-num">05</span>
+          <span>Nossos Serviços</span>
+        </a>
+        <a href="#depoimentos" class="mob-link">
+          <span class="mob-num">06</span>
+          <span>Clientes Satisfeitos</span>
+        </a>
+        <a href="#faq" class="mob-link">
+          <span class="mob-num">07</span>
+          <span>Dúvidas</span>
+        </a>
+      </nav>
+      <div class="mobile-footer">
+        <a href="https://wa.me/5521975957899?text=Olá!%20Gostaria%20de%20um%20diagnóstico%20gratuito." target="_blank" class="btn-primary mob-cta">
+          Diagnóstico Gratuito — Grátis
+        </a>
+        <p class="mob-tagline">nexvg.com.br</p>
+      </div>
+    </div>
   </div>
 
   <!-- ══ HERO ══ -->
-
   <section class="hero" id="inicio">
-    <div class="hero-line"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow reveal">Estrutura Digital para Empresas</div>
-      <h1 class="reveal reveal-delay-1">
-       Posicione sua <em>Empresa</em><br>no digital<br /> para gerar mais<br>confiança, clientes e <br> <em>faturamento</em>. <br />
-      </h1><br>
-     
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="#contato" class="btn-primary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+
+    <!-- Background grid -->
+    <div class="hero-grid-bg" aria-hidden="true">
+      <div class="grid-lines"></div>
+      <div class="hero-glow"></div>
+      <div class="hero-glow hero-glow-2"></div>
+    </div>
+
+    <div class="hero-container">
+
+      <!-- Tagline pill -->
+      <div class="hero-pill" data-reveal>
+        <span class="pill-dot"></span>
+        Presença digital que converte
+      </div>
+
+      <!-- Headline -->
+      <h1 class="hero-headline" data-reveal data-delay="1">
+        Sua empresa no digital.<br />
+        <em>Do jeito certo.</em>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="hero-sub" data-reveal data-delay="2">
+        Estruturamos a presença digital de pequenas e médias empresas com estratégia, clareza e resultado mensurável. Sem enrolação, sem template genérico.
+      </p>
+
+      <!-- Actions -->
+      <div class="hero-actions" data-reveal data-delay="3">
+        <a href="https://wa.me/5521975957899?text=Olá!%20Gostaria%20de%20um%20diagnóstico%20gratuito." target="_blank" class="btn-primary">
           Diagnóstico Gratuito
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
-        <a href="#servicos" class="btn-ghost">Ver Serviços →</a>
+        <a href="#servicos" class="btn-secondary">
+          Ver serviços
+        </a>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <span></span>
-      Scroll
-    </div>
-  </section>
-   <!-- ══ COMO FUNCIONA ══ -->
 
-  <section id="processo" class="section-pad">
-    <div class="container" style="text-align:center;">
-      <span class="section-label reveal" style="justify-content:center;">Como Funciona</span>
-      <h2 class="section-title reveal reveal-delay-1" style="max-width:540px;margin:0 auto;">
-        Um processo claro,<br />sem <em>surpresas</em>
-      </h2>
-    
+      <!-- Social proof strip -->
+      <div class="hero-proof" data-reveal data-delay="4">
+        <div class="proof-item">
+          <span class="proof-num">+40</span>
+          <span class="proof-label">empresas atendidas</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <span class="proof-num">100%</span>
+          <span class="proof-label">foco em resultado</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <span class="proof-num">RJ</span>
+          <span class="proof-label">e região</span>
+        </div>
+      </div>
 
+    </div>
 
-  <div class="steps">
-    <div class="step reveal">
-      <div class="step-num">1</div>
-      <div>
-        <div class="step-title">Diagnóstico Gratuito</div>
-        <div class="step-desc">Breve conversa para entender sua empresa e seus objetivos. Sem custo, sem compromisso.</div>
-      </div>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
     </div>
-    <div class="step reveal reveal-delay-1">
-      <div class="step-num">2</div>
-      <div>
-        <div class="step-title">Proposta Personalizada</div>
-        <div class="step-desc">Com base no diagnóstico, apresentamos um plano de ação para seu negócio.</div>
-      </div>
-    </div>
-    <div class="step reveal reveal-delay-2">
-      <div class="step-num">3</div>
-      <div>
-        <div class="step-title">Execução</div>
-        <div class="step-desc">Colocamos o plano em prática .</div>
-      </div>
-    </div>
-    <div class="step reveal reveal-delay-3">
-      <div class="step-num">4</div>
-      <div>
-        <div class="step-title">Evolução Contínua</div>
-        <div class="step-desc">Ajustamos a estratégia conforme o seu negócio cresce.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
   </section>
-
-  <hr class="divider" />
 <!-- ══ SEGMENTOS ══ -->
 <section id="segmentos" class="section-pad">
   <div class="container">
@@ -231,6 +269,55 @@
     </div>
   </div>
 </section>
+ 
+   <!-- ══ COMO FUNCIONA ══ -->
+
+  <section id="processo" class="section-pad">
+    <div class="container" style="text-align:center;">
+      <span class="section-label reveal" style="justify-content:center;">Como Funciona</span>
+      <h2 class="section-title reveal reveal-delay-1" style="max-width:540px;margin:0 auto;">
+        Um processo claro,<br />sem <em>surpresas</em>
+      </h2>
+    
+
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Diagnóstico Gratuito</div>
+        <div class="step-desc">Breve conversa para entender sua empresa e seus objetivos. Sem custo, sem compromisso.</div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Proposta Personalizada</div>
+        <div class="step-desc">Com base no diagnóstico, apresentamos um plano de ação para seu negócio.</div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Execução</div>
+        <div class="step-desc">Colocamos o plano em prática .</div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Evolução Contínua</div>
+        <div class="step-desc">Ajustamos a estratégia conforme o seu negócio cresce.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+  <hr class="divider" />
+
   <!-- ══ PROOF STRIP ══ -->
 
   <div class="proof-strip">

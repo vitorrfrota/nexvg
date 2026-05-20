@@ -1,42 +1,99 @@
-// ── Header scroll
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
-});
+/* ═══════════════════════════════════════
+   NEXVG — script.js
+   ═══════════════════════════════════════ */
 
-// ── Hamburger menu
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobileNav');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileNav.classList.toggle('open');
-  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
-});
-document.querySelectorAll('.mob-link').forEach(link => {
-  link.addEventListener('click', () => {
+(function () {
+  'use strict';
+
+  /* ── Header scroll ── */
+  const header = document.getElementById('header');
+
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run on load
+
+  /* ── Hamburger / Mobile Nav ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  let navOpen = false;
+
+  function openNav() {
+    navOpen = true;
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileNav.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    navOpen = false;
     hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
     mobileNav.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    navOpen ? closeNav() : openNav();
   });
-});
 
-// ── Reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
-    }
+  // Close on link click
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', closeNav);
   });
-}, { threshold: 0.12 });
-reveals.forEach(el => observer.observe(el));
 
-// Trigger hero reveals immediately
-setTimeout(() => {
-  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
-}, 100);
+  // Close on ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navOpen) closeNav();
+  });
 
+  /* ── Reveal on scroll ── */
+  const revealEls = document.querySelectorAll('[data-reveal], .reveal');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+  } else {
+    // Fallback for older browsers
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+
+  /* ── Hero reveal on load ── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.hero [data-reveal]').forEach(el => {
+        el.classList.add('visible');
+      });
+    }, 80);
+  });
+
+  /* ── Smooth anchor scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = parseInt(getComputedStyle(document.documentElement)
+        .getPropertyValue('--header-h')) || 64;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+})();
 // ── Testimonial Carousel
 (function() {
   const track = document.getElementById('tcTrack');

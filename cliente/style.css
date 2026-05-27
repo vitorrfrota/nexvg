@@ -280,7 +280,15 @@ margin-top: 10px;
 /* ═══════════════════════════════
    LEAD FORM PREMIUM
 ═══════════════════════════════ */
+.lead-form select {
+  color: #ffffff;
+  background: #1a1a1a;
+}
 
+.lead-form select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
 .lead-card{
   position: relative;
   background:

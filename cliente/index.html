@@ -139,49 +139,69 @@
       e descubra o que está impedindo sua empresa de gerar mais contatos.
     </p>
 
-    <form class="lead-form" id="leadForm">
+  <form 
+  action="https://formspree.io/f/mojbyqpq"
+  method="POST"
+  class="lead-form"
+  id="leadForm"
+>
 
-      <div class="input-group">
-        <label>Seu nome</label>
-        <input type="text" placeholder="Ex: João Silva">
-      </div>
 
-      <div class="input-group">
-        <label>WhatsApp</label>
-        <input type="tel" placeholder="(21) 99999-9999">
-      </div>
+  <div class="input-group">
+    <label>Seu nome</label>
 
-      <div class="input-group">
-        <label>Segmento da empresa</label>
+    <input 
+      type="text"
+      name="nome"
+      placeholder="Ex: João Silva"
+      required
+    >
+  </div>
 
-        <select>
-          <option selected disabled>
-            Selecione seu segmento
-          </option>
+  <div class="input-group">
+    <label>WhatsApp</label>
 
-          <option class="seg">Oficina Mecânica</option>
-          <option class="seg">Clínica</option>
-          <option class="seg">Estética</option>
-          <option class="seg">Assistência Técnica</option>
-          <option class="seg">Loja</option>
-          <option class="seg">Outro</option>
-        </select>
-      </div>
+    <input 
+      type="tel"
+      name="whatsapp"
+      placeholder="(21) 99999-9999"
+      required
+    >
+  </div>
 
-      <button type="submit" class="lead-submit">
-        Quero meu site profissional
+  <div class="input-group">
+    <label>Segmento da empresa</label>
 
-        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <select name="segmento" required>
+  <option value="" disabled selected>
+    Selecione seu segmento
+  </option>
 
-    </form>
+  <option>Oficina Mecânica</option>
+  <option>Clínica</option>
+  <option>Estética</option>
+  <option>Assistência Técnica</option>
+  <option>Loja</option>
+  <option>Outro</option>
+</select>
+    </select>
+  </div>
 
+  <button type="submit" class="lead-submit">
+    Quero meu site profissional
+
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+      <path 
+        d="M3 8h10M9 4l4 4-4 4"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+</form>
     <div class="lead-mini-info">
       <span>• Sem spam</span>
       <span>• Atendimento personalizado</span>
@@ -914,26 +934,25 @@
 
 const form = document.getElementById('leadForm');
 
-form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const nome = form.querySelector('input[name="nome"]').value;
-    const empresa = form.querySelector('input[name="empresa"]').value;
-    const telefone = form.querySelector('input[name="telefone"]').value;
+    const data = new FormData(form);
 
-    const mensagem = 
-`Olá, vim pelo site!
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
 
-*Nome:* ${nome}
-*Empresa:* ${empresa}
-*Telefone:* ${telefone}`;
-
-    const numeroWhatsApp = '5521975957899';
-
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-
-    window.open(url, '_blank');
-});
+    if (response.ok) {
+      window.location.href = "/obrigado/";
+    } else {
+      alert("Erro ao enviar formulário.");
+    }
+  });
 
 </script>
 </body>

@@ -86,17 +86,17 @@
 
         <div class="hero-pill" data-reveal>
           <span class="pill-dot"></span>
-          Criação de Sites Profissionais
+          Presença Digital Estratégica
         </div>
 
         <h1 class="hero-headline" data-reveal data-delay="1">
-          Seu negócio merece<br />
-          um site à<br />
-          <em>altura da sua entrega.</em>
+          Seu cliente está te<br />
+          procurando<br />
+          <em>mas ele te acha?</em>
         </h1>
 
         <p class="hero-sub" data-reveal data-delay="2">
-          Criamos sites modernos, rápidos e estratégicos para empresas que querem transmitir autoridade, atrair clientes e crescer no digital.
+          Criamos estratégia personalizada para empresas que querem transmitir autoridade, atrair clientes e crescer no digital.
         </p>
 
         <div class="hero-actions" data-reveal data-delay="3">
@@ -182,14 +182,21 @@
 
     <select name="segmento" required>
   <option value="" disabled selected>
-    Selecione seu segmento
+    Qual melhor descreve seu negócio?
   </option>
 
+  <option>Comércio /Loja</option>
+  <option>Prestador de Serviços</option>
+  <option>Clínica /Saúde</option>
+  <option>Advocacia</option>
+  <option>Construção Civil</option>
+  <option>Gráfica</option>
   <option>Oficina Mecânica</option>
-  <option>Clínica</option>
-  <option>Estética</option>
-  <option>Assistência Técnica</option>
-  <option>Loja</option>
+  <option>Imobiliária</option>
+  <option>Estética /Beleza</option>
+  <option>Educação / Cursos</option>
+  <option>Indústria</option>
+  <option>Tecnologia</option>
   <option>Outro</option>
 </select>
     </select>
@@ -224,6 +231,7 @@
       href="https://wa.me/5521975957899?text=Olá!%20Quero%20um%20diagnóstico%20gratuito."
       target="_blank"
       class="lead-whatsapp"
+      id="whatsapp_btn"
     >
       Chamar pelo WhatsApp agora
     </a>
@@ -883,7 +891,7 @@
   </footer>
 
   <!-- ══ WHATSAPP FLOAT ══ -->
-  <a class="whatsapp-float" href="https://wa.me/5521975957899?text=Olá!%20Vim%20pela%20página%20de%20sites%20e%20quero%20saber%20mais." target="_blank" aria-label="WhatsApp">
+  <a class="whatsapp-float" id="whatsapp-btn" href="https://wa.me/5521975957899?text=Olá!%20Vim%20pela%20página%20de%20sites%20e%20quero%20saber%20mais." target="_blank" aria-label="WhatsApp">
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.76.71 5.35 1.95 7.6L.5 31.5l8.18-1.93A15.44 15.44 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.3a13.24 13.24 0 01-6.74-1.84l-.48-.29-5.01 1.18 1.2-4.87-.31-.5A13.25 13.25 0 1116 28.8zm7.27-9.93c-.4-.2-2.35-1.16-2.71-1.29-.36-.14-.63-.2-.89.2-.26.39-1.02 1.29-1.25 1.56-.23.27-.46.3-.86.1-.4-.2-1.68-.62-3.2-1.98-1.18-1.05-1.98-2.35-2.21-2.74-.23-.4-.02-.61.17-.81.18-.18.4-.46.6-.7.2-.22.26-.39.4-.65.13-.26.07-.49-.03-.69-.1-.2-.9-2.16-1.23-2.96-.32-.78-.65-.67-.89-.68l-.75-.01c-.26 0-.69.1-1.05.49-.36.4-1.38 1.35-1.38 3.3s1.41 3.83 1.61 4.09c.2.26 2.78 4.24 6.73 5.95.94.41 1.67.65 2.24.83.94.3 1.8.26 2.47.16.75-.11 2.35-.96 2.68-1.89.33-.92.33-1.71.23-1.88-.1-.16-.36-.26-.76-.46z"/>
     </svg>
@@ -990,7 +998,9 @@ const form = document.getElementById('leadForm');
       alert("Erro ao enviar formulário.");
     }
   });
-
+document.getElementById('whatsapp-btn').addEventListener('click', function(){
+  gtag('event', 'whatsapp_click');
+});
 </script>
 </body>
 </html>

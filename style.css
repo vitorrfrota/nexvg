@@ -802,8 +802,12 @@ section { position: relative; z-index: 1; }
 
 }
 
+.hero-actions {
+  margin-top: 100px;
+}
+
 .hero-proof {
-  margin-top: 150px;
+  margin-top: 180px;
 }
 /* ═══════════════════
    PROOF STRIP

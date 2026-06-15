@@ -223,3 +223,24 @@ segClear.addEventListener('click', () => {
   segCards.forEach(c => c.classList.remove('hidden'));
   segSearch.focus();
 });
+
+// Redirecionamento pra pagina OBRIGADO
+document.getElementById("leadForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+
+  const response = await fetch(form.action, {
+    method: "POST",
+    body: new FormData(form),
+    headers: {
+      "Accept": "application/json"
+    }
+  });
+
+  if (response.ok) {
+    window.location.href = "/obrigado/";
+  } else {
+    alert("Erro ao enviar formulário. Tente novamente.");
+  }
+});

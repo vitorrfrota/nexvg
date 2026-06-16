@@ -502,6 +502,7 @@ margin-top: 10px;
 
   width: 100%;
   max-width: 540px;
+  margin: 0 auto;
 }
 .seg {color: #070d16;}
 .lead-card-glow{
@@ -860,7 +861,7 @@ section { position: relative; z-index: 1; }
    PROBLEMA
    ═══════════════════ */
 
-.argument-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.argument-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;  }
 .argument-visual { position: relative; }
 .argument-visual-inner { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; position: relative; overflow: hidden; }
 .argument-visual-inner::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }

@@ -333,15 +333,15 @@ margin-top: 10px;
    ═══════════════════ */
 .hero-headline {
   text-shadow:
-    0 3px 8px rgba(0,0,0,.8),
-    0 8px 25px rgba(0,0,0,.6),
-    0 15px 50px rgba(0,0,0,.4) !important;
+    0 3px 8px rgba(0,0,0,.2),
+    0 8px 25px rgba(0,0,0,.3),
+    0 15px 50px rgba(0,0,0,.2) !important;
 }
 
 .hero-sub {
   text-shadow:
-    0 2px 6px rgba(0,0,0,.8),
-    0 6px 20px rgba(0,0,0,.5) !important;
+    0 2px 6px rgba(0,0,0,.3),
+    0 6px 20px rgba(0,0,0,.2) !important;
 }
   .hero {
   position: relative;
@@ -408,7 +408,7 @@ margin-top: 10px;
   top: 40%; left: 20%; transform: none;
 }
 
-.hero-container { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; width: 100%; }
+.hero-container { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; width: 100%; margin-bottom: 65px;}
 
 .hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -416,6 +416,7 @@ margin-top: 10px;
   text-transform: uppercase; color: var(--cyan);
   background: var(--cyan-dim); border: 1px solid rgba(61,217,229,.18);
   padding: 6px 14px; border-radius: 100px; margin-bottom: 32px;
+ 
 }
 
 .pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); animation: pulse 2.5s ease-in-out infinite; }
@@ -429,7 +430,7 @@ margin-top: 10px;
   font-family: var(--serif);
   font-size: clamp(2.6rem, 6vw, 4.8rem);
   font-weight: 400; line-height: 1.08;
-  letter-spacing: -.02em; color: var(--white); margin-bottom: 24px;
+  letter-spacing: -.02em; color: var(--white); margin-top: 24px;
 }
 .hero-headline em { font-style: italic; color: var(--cyan); }
 
@@ -808,7 +809,7 @@ section { position: relative; z-index: 1; }
 }
 
 .hero-proof {
-  margin-top: 180px;
+  margin-top: 20px;
 }
 /* ═══════════════════
    PROOF STRIP

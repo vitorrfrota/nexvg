@@ -965,6 +965,14 @@ section { position: relative; z-index: 1; }
   text-decoration: none;
   color: inherit;
 }
+
+a.wpp,
+a.wpp:hover,
+a.wpp:visited,
+a.wpp:active {
+    text-decoration: none;
+    color: inherit;
+}
 /* ═══════════════════
    STEPS
    ═══════════════════ */

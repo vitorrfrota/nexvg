@@ -876,21 +876,90 @@ section { position: relative; z-index: 1; }
 /* ═══════════════════
    SERVIÇOS
    ═══════════════════ */
+.services-bg {
+    background: var(--deep);
+}
 
-.services-bg { background: var(--deep); }
-.services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 72px; }
-.services-grid { display: grid; grid-template-columns: 1fr; gap: 2px; }
+.services-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 72px;
+}
 
-.service-card { display: flex; align-items: center; gap: 20px; background: var(--surface); border: 1px solid var(--border); padding: 24px 28px; position: relative; transition: background .3s, border-color .3s; overflow: hidden; cursor: default; }
-.service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan-dk), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease); }
-.service-card:hover { background: #0e1e2e; border-color: var(--cyan-dk); }
-.service-card:hover::after { transform: scaleX(1); }
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+}
 
-.service-num   { font-family: var(--ff-serif); font-size: .85rem; color: var(--cyan-dk); font-style: italic; }
-.service-icon  { font-size: 1.8rem; }
-.service-title { font-family: var(--ff-serif); font-size: 1.25rem; font-weight: 400; color: var(--white); }
-.service-desc  { font-size: .84rem; color: var(--muted); line-height: 1.7; }
+.service-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    position: relative;
+    transition: background .3s, border-color .3s;
+    overflow: hidden;
+    cursor: default;
+}
 
+.service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan-dk), var(--cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s var(--ease);
+}
+
+.service-card:hover {
+    background: #0e1e2e;
+    border-color: var(--cyan-dk);
+}
+
+.service-card:hover::after {
+    transform: scaleX(1);
+}
+
+.service-num {
+    font-family: var(--ff-serif);
+    font-size: .85rem;
+    color: var(--cyan-dk);
+    font-style: italic;
+}
+
+.service-icon {
+    font-size: 1.8rem;
+}
+
+.service-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-title {
+    margin: 0;
+    font-family: var(--ff-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--white);
+}
+
+.service-desc {
+    margin: 6px 0 0 0;
+    font-size: .84rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
 /* ═══════════════════
    STEPS
    ═══════════════════ */

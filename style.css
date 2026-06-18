@@ -962,7 +962,7 @@ section { position: relative; z-index: 1; }
 }
 
 .wpp {
-  text-decoration: none;
+  text-decoration: none !important; 
   color: inherit;
 }
 
@@ -970,7 +970,7 @@ a.wpp,
 a.wpp:hover,
 a.wpp:visited,
 a.wpp:active {
-    text-decoration: none;
+    text-decoration: none !important; 
     color: inherit;
 }
 /* ═══════════════════

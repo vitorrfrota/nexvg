@@ -152,6 +152,7 @@
   method="POST"
   class="lead-form"
   id="leadForm"
+  onsubmit="sendLeadToManager(event)"
 >
 
 
@@ -994,6 +995,24 @@ const form = document.getElementById('leadForm');
 document.getElementById('whatsapp-btn').addEventListener('click', function(){
   gtag('event', 'whatsapp_click');
 });
+</script>
+<script>
+  async function sendLeadToManager(event) {
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch('https://SEU-MANAGER/api/leads/public', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.get('nome'),
+        whatsapp: formData.get('whatsapp'),
+        segment: formData.get('segmento'),
+      }),
+    }).catch(() => {});
+  }
 </script>
 </body>
 </html>

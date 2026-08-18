@@ -980,14 +980,25 @@ async function sendLeadToManager(formData) {
  const apiUrl = window.__NEXVG_LEADS_API_URL__.trim();
  if (!apiUrl) return;
 
- await fetch(apiUrl.replace(/\/+$/, '') + '/api/leads/public', {
+ const endpoint = apiUrl.replace(/\/+$/, '') + '/api/leads/public';
+ const payload = JSON.stringify({
+   name: formData.get('nome'),
+   whatsapp: formData.get('whatsapp'),
+   segment: formData.get('segmento'),
+ });
+
+ if (navigator.sendBeacon) {
+   const beaconBody = new Blob([payload], { type: 'application/json' });
+   const sent = navigator.sendBeacon(endpoint, beaconBody);
+   if (sent) {
+     return;
+   }
+ }
+
+ await fetch(endpoint, {
    method: 'POST',
    headers: { 'Content-Type': 'application/json' },
-   body: JSON.stringify({
-     name: formData.get('nome'),
-     whatsapp: formData.get('whatsapp'),
-     segment: formData.get('segmento'),
-   }),
+   body: payload,
    keepalive: true,
  });
 }

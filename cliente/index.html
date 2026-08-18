@@ -997,11 +997,18 @@ document.getElementById('whatsapp-btn').addEventListener('click', function(){
 });
 </script>
 <script>
+  window.__NEXVG_LEADS_API_URL__ = window.__NEXVG_LEADS_API_URL__ || 'https://manager-nexvg-production.up.railway.app';
+
   async function sendLeadToManager(event) {
     const form = event.target;
     const formData = new FormData(form);
+    const apiUrl = window.__NEXVG_LEADS_API_URL__.trim();
 
-    fetch('https://SEU-MANAGER/api/leads/public', {
+    if (!apiUrl) {
+      return;
+    }
+
+    fetch(apiUrl.replace(/\/+$/, '') + '/api/leads/public', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

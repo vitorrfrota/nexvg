@@ -971,77 +971,56 @@
 
 })();
 
+window.__NEXVG_LEADS_API_URL__ =
+ window.__NEXVG_LEADS_API_URL__ || 'https://manager-nexvg-production.up.railway.app';
+
 const form = document.getElementById('leadForm');
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+async function sendLeadToManager(formData) {
+ const apiUrl = window.__NEXVG_LEADS_API_URL__.trim();
+ if (!apiUrl) return;
 
-    const data = new FormData(form);
+ await fetch(apiUrl.replace(/\/+$/, '') + '/api/leads/public', {
+   method: 'POST',
+   headers: { 'Content-Type': 'application/json' },
+   body: JSON.stringify({
+     name: formData.get('nome'),
+     whatsapp: formData.get('whatsapp'),
+     segment: formData.get('segmento'),
+   }),
+   keepalive: true,
+ });
+}
 
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
+if (form) {
+ form.addEventListener('submit', async function (e) {
+   e.preventDefault();
 
-    if (response.ok) {
-      window.location.href = "/obrigado/";
-    } else {
-      alert("Erro ao enviar formulário.");
-    }
-  });
-document.getElementById('whatsapp-btn').addEventListener('click', function(){
-  gtag('event', 'whatsapp_click');
+   const data = new FormData(form);
+
+   const managerPromise = sendLeadToManager(data).catch(() => {});
+   const formspreeResponse = await fetch(form.action, {
+     method: form.method,
+     body: data,
+     headers: { Accept: 'application/json' },
+   });
+
+   await Promise.race([
+     managerPromise,
+     new Promise((resolve) => setTimeout(resolve, 1200)),
+   ]);
+
+   if (formspreeResponse.ok) {
+     window.location.href = '/obrigado/';
+   } else {
+     alert('Erro ao enviar formulário.');
+   }
+ });
+}
+
+document.getElementById('whatsapp-btn').addEventListener('click', function () {
+ gtag('event', 'whatsapp_click');
 });
-</script>
-<script>
-  window.__NEXVG_LEADS_API_URL__ =
-    window.__NEXVG_LEADS_API_URL__ || 'https://manager-nexvg-production.up.railway.app';
-
-  const form = document.getElementById('leadForm');
-
-  async function sendLeadToManager(formData) {
-    const apiUrl = window.__NEXVG_LEADS_API_URL__.trim();
-    if (!apiUrl) return;
-
-    await fetch(apiUrl.replace(/\/+$/, '') + '/api/leads/public', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: formData.get('nome'),
-        whatsapp: formData.get('whatsapp'),
-        segment: formData.get('segmento'),
-      }),
-      keepalive: true,
-    });
-  }
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const data = new FormData(form);
-
-    const managerPromise = sendLeadToManager(data).catch(() => {});
-    const formspreeResponse = await fetch(form.action, {
-      method: form.method,
-      body: data,
-      headers: { Accept: 'application/json' },
-    });
-
-    // dá tempo do request do Manager sair antes do redirect
-    await Promise.race([
-      managerPromise,
-      new Promise((resolve) => setTimeout(resolve, 1200)),
-    ]);
-
-    if (formspreeResponse.ok) {
-      window.location.href = '/obrigado/';
-    } else {
-      alert('Erro ao enviar formulário.');
-    }
-  });
 </script>
 </body>
 </html>

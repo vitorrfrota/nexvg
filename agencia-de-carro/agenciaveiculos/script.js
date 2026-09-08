@@ -77,7 +77,8 @@ function parcel(p){return 'R$ '+Math.round(Number(String(p).replace(/\D/g,''))/6
 // ESTOQUE
 function render(){
   const list=curFilter==='all'?cars:cars.filter(c=>c.status===curFilter);
-  document.getElementById('cnt').textContent=cars.length+'+';
+  const vehicleCount=document.getElementById('cnt');
+  if(vehicleCount)vehicleCount.textContent=cars.length+'+';
   let h='';
   list.forEach(c=>{
     const slbl={novo:'Novo',usado:'Usado',destaque:'⭐ Destaque'}[c.status];
